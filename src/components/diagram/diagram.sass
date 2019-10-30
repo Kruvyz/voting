@@ -1,0 +1,47 @@
+@import '../../styles/color.sass';
+
+.results 
+    width: 400px;
+    margin: 40px auto 0;
+
+.diagram
+    position: relative;
+    width: 400px;
+    height: 150px;
+    margin: 20px;
+
+    &-block
+        position: absolute;
+        height: 30px;
+        width: 2px;
+
+        &:nth-child(1)
+            top: 0px;
+            left: 50%;
+            background-color: $dark-green;
+        
+        &:nth-child(2)
+            top: 30px;
+            left: 50%;
+            background-color: $green;            
+        
+        &:nth-child(3)
+            top: 60px;
+            background-color: $yellow;  
+            left: 175px;          
+        
+        &:nth-child(4)
+            top: 90px;
+            right: 50%;
+            background-color: $red;            
+
+        &:nth-child(5)
+            top: 120px;
+            right: 50%;
+            background-color: $dark-red;
+
+    &__name
+        text-align: center;
+
+    &:last-child
+        margin-bottom: 0;
