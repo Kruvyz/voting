@@ -11,7 +11,7 @@ class Matrix {
 
     render() {
         const tableHeader = $(document.createElement('tr'));
-        tableHeader.append(`<td></td>`);
+        tableHeader.append(`<td class="matrix__name"></td>`);
 
         this.candidates.forEach(element => {
             tableHeader.append(`<td><p>${element.name}</p></td>`);           
@@ -20,10 +20,10 @@ class Matrix {
 
         this.matrix.forEach(element => {
             let row =  $(document.createElement('tr'));
-            row.append(`<td>${element.name}</td>`);           
+            row.append(`<td class="matrix__name">${element.name}</td>`);           
             
             for (let i in element.votes) {
-                row.append(`<td class="color-${element.votes[i]}"></td>`);           
+                row.append(`<td class="color-${element.votes[i]} colors"></td>`);           
             }
             this.$el.append(row);
         });

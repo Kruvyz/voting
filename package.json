@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently --kill-others \"npm run dev-serv\" \"npm run dev-pack\"",
-    "dev-serv": "nodemon ./server.js",
+    "start": "nodemon server.js",
+    "heroku-postbuild": "webpack --config ./webpack.config.js",
+    "start-local": "concurrently --kill-others \"npm run start\" \"npm run dev-pack\"",
     "dev-pack": "webpack --config ./webpack.config.js"
   },
   "author": "",
