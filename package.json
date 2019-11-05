@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "12.13.x"
+  },
   "scripts": {
     "start": "nodemon server.js",
-    "heroku-postbuild": "webpack --config ./webpack.config.js",
+    "heroku-prebuild": "webpack --config ./webpack.config.js",
     "start-local": "concurrently --kill-others \"npm run start\" \"npm run dev-pack\"",
     "dev-pack": "webpack --config ./webpack.config.js"
   },
