@@ -4,6 +4,7 @@ class Voting {
     constructor(el) {
       this.$el = $(el);
       this.$votingCards = this.$el.find('.js-voting-cards');
+      this.$votingExpert = $('.js-voting-expert-name');
       this.expertName = new ExpertName('.js-form-expert-name');
       this.expertsCount = 0;
       this.currentVote = 0;
@@ -17,6 +18,8 @@ class Voting {
     }
   
     render() {
+      $('.js-voting-expert-name').html("Голосує: " + this.experts[this.currentVote].name);
+
       window.candidates.forEach((element, index) => {
         const id = element.name + index;
         this.$votingCards.append(`
@@ -61,9 +64,9 @@ class Voting {
           this.expertName.show(); 
         })
         .on('get-expert-name', (e, name) => {
+          this.experts.push({name, votes: {}});           
           this.show();
           this.render();
-          this.experts.push({name, votes: {}}); 
         })
         .on('get-expert-name-show', () => {
           this.hide();
@@ -93,10 +96,12 @@ class Voting {
   
     hide() {
       this.$el.hide();
+      this.$votingExpert.hide();      
     }
   
     show() {
       this.$el.show();
+      this.$votingExpert.show();      
     }
 
     getVotes() {

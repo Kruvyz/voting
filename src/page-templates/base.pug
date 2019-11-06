@@ -1,12 +1,15 @@
 doctype html
-html
+html(lang="uk")
   head
     title Голосування
   body
     .container
       header
-        a(href="/") Голосувати
-        a(href="/result") Результат
+        div
+          img.logo(src="https://res-5.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/axw0nnfgnvxukhuoepjh" alt="logo")
+        div
+          a(href="/") Почати голосування
+          a(href="/result") Переглянути результат
         
       block body
 

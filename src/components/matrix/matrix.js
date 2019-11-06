@@ -11,16 +11,17 @@ class Matrix {
 
     render() {
         const tableHeader = $(document.createElement('tr'));
-        tableHeader.append(`<td class="matrix__name"></td>`);
+        tableHeader.addClass('matrix__head');
+        tableHeader.append(`<td></td>`);
 
         this.candidates.forEach(element => {
-            tableHeader.append(`<td><p>${element.name}</p></td>`);           
+            tableHeader.append(`<td title="${element.name}"><p>${element.name}</p></td>`);           
         }); 
         this.$el.append(tableHeader);
 
         this.matrix.forEach(element => {
             let row =  $(document.createElement('tr'));
-            row.append(`<td class="matrix__name">${element.name}</td>`);           
+            row.append(`<td class="matrix__name" title="${element.name}"><p>${element.name}</p></td>`);           
             
             for (let i in element.votes) {
                 row.append(`<td class="color-${element.votes[i]} colors"></td>`);           

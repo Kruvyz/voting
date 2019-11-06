@@ -15,7 +15,9 @@ class ExpertsName {
     }
 
     initListeners() {
-        this.$button.on('click', () => {
+        this.$el.on('submit', (e) => {
+            e.preventDefault();
+            
             const name = this.$input.val();
             $(document).trigger('get-expert-name', name);
             this.hide();
