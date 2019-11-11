@@ -2,7 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+const is_prop = process.env.NODE_ENV || 'production';
 
 module.exports = {
   entry: {
@@ -13,7 +15,7 @@ module.exports = {
     filename: 'scripts/main.js',
     publicPath: '/'
   },
-  mode: 'development',
+  mode: is_prod ? 'production' : 'development',
   devtool: 'source-map',
   watch: true,
   module: {
