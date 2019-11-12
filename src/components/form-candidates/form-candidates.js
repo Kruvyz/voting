@@ -26,7 +26,7 @@ class FormCandidates {
           $div.append(`
             <div class="form-candidates__name-item">
               <label for=${i}>Альтернатива ${i + 1}</label>
-              <input id=${i} class="form-candidates__name-input ${SETTINGS.SELECTOR.INPUT_NAME}" type="text" required>
+              <input id=${i} class="form-candidates__name-input ${SETTINGS.SELECTOR.INPUT_NAME}" type="text" required maxlength="50">
             </div>
             `);
         }
