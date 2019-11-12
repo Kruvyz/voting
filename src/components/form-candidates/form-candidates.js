@@ -25,8 +25,8 @@ class FormCandidates {
         for (let i = 0; i < value; i++) {
           $div.append(`
             <div class="form-candidates__name-item">
-              <label for=${i}>Ім'я ${i + 1} кадидата</label>
-              <input id=${i} class="form-candidates__name-input ${SETTINGS.SELECTOR.INPUT_NAME}" type="text">
+              <label for=${i}>Альтернатива ${i + 1}</label>
+              <input id=${i} class="form-candidates__name-input ${SETTINGS.SELECTOR.INPUT_NAME}" type="text" required>
             </div>
             `);
         }
@@ -34,7 +34,8 @@ class FormCandidates {
         $(`.${SETTINGS.SELECTOR.CONFIRM_BUTTON}`).show();
       });
       
-      $(`.${SETTINGS.SELECTOR.CONFIRM_BUTTON}`).on('click', () => {
+      $(`.js-name-list`).on('submit', (e) => {
+        e.preventDefault();
         const $names = $(`.${SETTINGS.SELECTOR.INPUT_NAME}`);
         window.candidates = [];
     

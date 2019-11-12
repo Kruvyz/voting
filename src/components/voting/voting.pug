@@ -1,7 +1,8 @@
 include ../form-experts/experts-name
 
 mixin voting
+    +expert-name
+    .voting-expert-name.js-voting-expert-name
     form.voting.js-voting
         .voting-cards.js-voting-cards
-        button(class="js-voting-button") Завершити голосування
-    +expert-name
+        button(class="js-voting-button") Проголосувати

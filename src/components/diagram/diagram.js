@@ -28,7 +28,7 @@ class Diagram {
         });
 
         this.$el.find('.js-name').each((i , e) => {
-            e.innerHTML = 'Кандидат: ' + this.candidatesData[i].name;
+            e.innerHTML = 'Альтернатива: ' + this.candidatesData[i].name;
         });
     }
 }
