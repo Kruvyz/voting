@@ -4,6 +4,8 @@ const nodeExternals = require('webpack-node-externals');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
+const is_prod = process.env.NODE_ENV;
+
 module.exports = {
   entry: {
     main: './src/app.js',
@@ -15,7 +17,7 @@ module.exports = {
   },
   mode: 'development',
   devtool: 'source-map',
-  watch: true,
+  watch: is_prod ? false : true,
   module: {
     rules: [
       {
@@ -48,7 +50,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new webpack.ProvidePlugin({
         $: 'jquery',
         jQuery: 'jquery'

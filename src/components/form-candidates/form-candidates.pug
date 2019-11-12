@@ -1,8 +1,8 @@
 mixin form-candidates
     .form-candidates.js-form-candidates
         .form-candidates__count
-            label.form-candidates__count-label.label(for="count-candidates") Кількість кандидатів:
+            label.form-candidates__count-label.label(for="count-candidates") Кількість альтернатив:
             input.js-field-number(id="count-candidates", min="1", max="10", type="number", value="2")
             button.js-button OK
-        .form-candidates__name-list.js-name-list
-        button.hidden.js-confirm-button Почати голосування
+        form.form-candidates__name-list.js-name-list(id="form1")
+        button.hidden.js-confirm-button(form="form1") Далі
