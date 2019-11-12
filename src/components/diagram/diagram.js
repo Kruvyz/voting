@@ -21,9 +21,24 @@ class Diagram {
             $(element).children().each((i, e) => {
                 let width = (data[index].votes[5 - i].length / countExperts) * 200;
                 let ident = 200 - width / 2;
+                let $value = $(e).find('.diagram-block__value');
 
                 if (i == 2) $(e).css('left', ident); 
-                $(e).width(width ? width : 1); 
+                $(e).width(width ? width : 1);
+
+                $value.html(this.candidatesData[index].votes[i + 1].length);                                 
+
+                if (i < 2) {
+                    $value.css('right', -15);
+                } else if (i === 2) {
+                    $value.css({
+                        'left': '50%',
+                        'transform': 'translate(-50%, -50%)'
+                    });                    
+                } else {
+                    $value.css('left', -15);                    
+                }
+                
             });
         });
 
