@@ -24,7 +24,7 @@ class Diagram {
                 let $value = $(e).find('.diagram-block__value');
 
                 if (i == 2) $(e).css('left', ident); 
-                $(e).width(width ? width : 1);
+                $(e).width(width ? width : 0);
 
                 $value.html(this.candidatesData[index].votes[i + 1].length);                                 
 
