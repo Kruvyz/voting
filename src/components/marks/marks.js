@@ -1,13 +1,16 @@
+import markPug from './mark.pug';
+
 class Marks {
     constructor(el) {
         this.$el = $(el);
         this.marks = [];
         this.candidatesData = JSON.parse(localStorage.getItem('candidates'));
-        this.expertsData = JSON.parse(localStorage.getItem('experts'));        
+        this.expertsData = JSON.parse(localStorage.getItem('experts'));  
     }
 
     init() {
         this.getMarks();
+        this.marks.sort((a, b) => b.mark - a.mark)
         this.render();
     }
 
@@ -27,7 +30,7 @@ class Marks {
         this.$el.html('');
         
         this.marks.forEach(element => {
-            this.$el.append(`<p class="marks__elem">${element.name} = ${element.mark}</p>`)
+            this.$el.append(markPug({ name: element.name, value: element.mark }))
         });
     }
 }
