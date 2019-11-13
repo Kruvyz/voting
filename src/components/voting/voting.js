@@ -84,8 +84,20 @@ class Voting {
         if (this.currentVote >= this.expertsCount) {
           this.hide();
           localStorage.setItem('candidates', JSON.stringify(window.candidates));
-          localStorage.setItem('experts', JSON.stringify(this.experts));  
-          window.location.assign(window.location.origin + '/result');        
+          localStorage.setItem('experts', JSON.stringify(this.experts));    
+
+          const result = {candidates: window.candidates, experts: this.experts};
+          
+          fetch('/results', {
+            method: 'PUT',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(result)
+          });
+
+          window.location.assign(window.location.origin + '/results-render'); 
           return;
         }
 
