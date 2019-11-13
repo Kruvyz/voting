@@ -7,6 +7,7 @@ const port = process.env.PORT || 3000;;
 app.set('views', './src/pages');
 app.set('view engine', 'pug');
 app.use('/static', express.static('dist'));
+app.use('/images', express.static('./images'));
 
 app.get('/', function (req, res) {
   res.render('index');
