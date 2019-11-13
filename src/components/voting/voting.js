@@ -84,8 +84,7 @@ class Voting {
         if (this.currentVote >= this.expertsCount) {
           this.hide();
           localStorage.setItem('candidates', JSON.stringify(window.candidates));
-          localStorage.setItem('experts', JSON.stringify(this.experts));
-          localStorage.setItem('matrix', JSON.stringify(this.matrix));          
+          localStorage.setItem('experts', JSON.stringify(this.experts));  
           window.location.assign(window.location.origin + '/result');        
           return;
         }

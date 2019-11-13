@@ -26,7 +26,7 @@ class Diagram {
                 if (i == 2) $(e).css('left', ident); 
                 $(e).width(width ? width : 0);
 
-                $value.html(this.candidatesData[index].votes[i + 1].length);                                 
+                $value.html(data[index].votes[5 - i].length);                                 
 
                 if (i < 2) {
                     $value.css('right', -15);
