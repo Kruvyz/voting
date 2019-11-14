@@ -24,7 +24,7 @@ class Voting {
         const id = element.name + index;
         this.$votingCards.append(`
           <div class="voting__card">
-            <p class="voting__card-title">${element.name}</p>
+            <p class="voting__card-title" title="${element.name}">${element.name}</p>
             <div class="voting__card-form">
               <div>
                 <input id="${"vote-first" + id}" type="radio" value="5" name="${id}"/>
