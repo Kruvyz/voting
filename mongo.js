@@ -1,11 +1,11 @@
-const {MongoClient, ObjectId} = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 
 const url = 'mongodb://localhost:27017';
 const databaseName = 'voting';
 const collectionName = 'results';
 
 async function getResultsById(id) {
-  const client = await MongoClient.connect(url, {useNewUrlParser: true});
+  const client = await MongoClient.connect(url, { useUnifiedTopology: true });
 
   const db = client.db(databaseName);
   const collection = db.collection(collectionName);
@@ -18,7 +18,7 @@ async function getResultsById(id) {
 }
 
 async function addResultToResults(element) {
-  const client = await MongoClient.connect(url, { useNewUrlParser: true });
+  const client = await MongoClient.connect(url, { useUnifiedTopology: true });
 
   const db = client.db(databaseName);
   const collection = db.collection(collectionName);
@@ -29,7 +29,7 @@ async function addResultToResults(element) {
 }
 
 async function getResults() {
-  const client = await MongoClient.connect(url, {useNewUrlParser: true});
+  const client = await MongoClient.connect(url, { useUnifiedTopology: true });
 
   const db = client.db(databaseName);
   const collection = db.collection(collectionName);

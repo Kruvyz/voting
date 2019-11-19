@@ -1,11 +1,16 @@
 class Winner {
     constructor(el) {
         this.$el = $(el);
-        this.candidatesData = JSON.parse(localStorage.getItem('candidates'));
-        this.expertsData = JSON.parse(localStorage.getItem('experts'));    
+        this.candidatesData = [];
+        this.expertsData = [];   
     }
 
     init() {
+        if (!this.$el.length) return;
+
+        this.candidatesData = JSON.parse($('#data').text()).candidates;
+        this.expertsData = JSON.parse($('#data').text()).experts; 
+
         this.findWinner();
     }
 

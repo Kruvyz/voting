@@ -3,8 +3,10 @@ extends ../page-templates/base
 include ../components/form-candidates/form-candidates
 include ../components/form-experts/form-experts
 include ../components/voting/voting
+include ../components/form-name/form-name
 
 block body
+  +form-name
   +form-candidates
   +form-experts
   +voting

@@ -55,6 +55,10 @@ class FormCandidates {
         this.hide();
         $(document).trigger('form-experts-show');
       });
+
+      $(document).on('create-candidates', () => {
+        this.$el.show();
+      });
     }
   }
 

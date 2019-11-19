@@ -86,7 +86,7 @@ class Voting {
           localStorage.setItem('candidates', JSON.stringify(window.candidates));
           localStorage.setItem('experts', JSON.stringify(this.experts));    
 
-          const result = {candidates: window.candidates, experts: this.experts};
+          const result = {candidates: window.candidates, experts: this.experts, name: window.name};
           
           fetch('/results', {
             method: 'PUT',

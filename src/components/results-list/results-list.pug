@@ -1,0 +1,5 @@
+mixin results-list(data)
+    .results-list
+    each result in data
+        a.results-list__item(href="/results/" + result._id)!= result.name
+            

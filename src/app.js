@@ -4,9 +4,11 @@ import './styles/global.sass';
 import './components/diagram/diagram.sass';
 import './components/matrix/matrix.sass';
 import './components/marks/marks.sass';
+import './components/results-list/results-list.sass';
 
 import FormCandidates from './components/form-candidates/form-candidates';
 import FormExperts from './components/form-experts/form-experts';
+import FormName from './components/form-name/form-name';
 import Voting from './components/voting/voting';
 import Diagram from './components/diagram/diagram';
 import Matrix from './components/matrix/matrix';
@@ -33,3 +35,6 @@ winner.init();
 
 const marks = new Marks('.js-marks');
 marks.init();
+
+const formName = new FormName('.js-form-name');
+formName.init();

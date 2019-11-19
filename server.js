@@ -13,8 +13,8 @@ app.set('views', './src/pages');
 app.set('view engine', 'pug');
 app.use('/static', express.static('dist'));
 
-app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended: true})); 
+app.use(express.json());  
 
 app.get('/', function (req, res) {
   res.render('index');
@@ -27,16 +27,16 @@ app.get('/results-render', function (req, res) {
 app.get('/results/:id', function(req, res) {
   const id = req.params.id;
 
-  getResults(id)
-    .then(response => res.send(response))
+  getResultsById(id)
+    .then(response => res.render('diagram-page', { data: response }))
     .catch(error => {
       console.error(error.message);
     });
 });
 
 app.get('/results', function(req, res) {
-  getResultsById()
-    .then(response => res.send(response))
+  getResults()
+    .then(response => res.render('results', { data: response }))
     .catch(error => {
       console.error(error.message);
     });

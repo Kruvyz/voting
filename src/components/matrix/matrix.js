@@ -1,11 +1,16 @@
 class Matrix {
     constructor(el) {
         this.$el = $(el);
-        this.matrix = JSON.parse(localStorage.getItem('experts'));
-        this.candidates = JSON.parse(localStorage.getItem('candidates'));
+        this.matrix = [];
+        this.candidates = [];
     }
 
     init() {
+        if (!this.$el.length) return;
+
+        this.matrix = JSON.parse($('#data').text()).experts;
+        this.candidates = JSON.parse($('#data').text()).candidates;
+
         this.render();
     }
 
