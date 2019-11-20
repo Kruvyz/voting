@@ -20,6 +20,9 @@ class Matrix {
         this.$el.append(tableHeader);
 
         this.matrix.forEach(element => {
+            const emptyRow = $(document.createElement('tr'));
+            emptyRow.addClass('matrix__empty-row');
+
             let row =  $(document.createElement('tr'));
             row.append(`<td class="matrix__name" title="${element.name}"><p>${element.name}</p></td>`);           
             
@@ -27,6 +30,7 @@ class Matrix {
                 row.append(`<td class="color-${element.votes[i]} colors"></td>`);           
             }
             this.$el.append(row);
+            this.$el.append(emptyRow);
         });
     }
 }
