@@ -5,7 +5,10 @@ include ../components/matrix/matrix
 
 block body
     .winner.js-winner
+    +matrix    
     +diagram
-    +matrix
+    h2.h2.winner Результуюче ранжування альтернатив
     .js-marks.marks
-    
+    .buttons
+        a(class="button", href="/") Почати нове голосування
+        a(class="button", href="/result") Переглянути результати        

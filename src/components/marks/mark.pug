@@ -1,4 +1,14 @@
 .marks__elem
   .mark__name(title= name)= name
-  .mark__line(style="width:" + value * 100 + "px")
+  .mark__line
+    if value > 0
+      .mark__line-negative
+      .mark__line-positive(style="width:" + value * 100 + "px")
+    if value == 0
+      .mark__line-negative
+      .mark__line-positive(style="width:1px")
+    else
+      .mark__line-negative(style="width:" + value * -100 + "px")
+      .mark__line-positive
+      
   .mark__value= value

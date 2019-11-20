@@ -27,7 +27,7 @@ class Matrix {
             row.append(`<td class="matrix__name" title="${element.name}"><p>${element.name}</p></td>`);           
             
             for (let i in element.votes) {
-                row.append(`<td class="color-${element.votes[i]} colors"></td>`);           
+                row.append(`<td class="color-${+element.votes[i] + 3} colors"></td>`);           
             }
             this.$el.append(row);
             this.$el.append(emptyRow);

@@ -10,7 +10,7 @@ class Marks {
 
     init() {
         this.getMarks();
-        this.marks.sort((a, b) => b.mark - a.mark)
+        this.marks.sort(compare)
         this.render();
     }
 
@@ -22,7 +22,11 @@ class Marks {
                 score += i * element.votes[i].length;
             }
 
-            this.marks.push({name: element.name, mark: Math.round((score / this.expertsData.length) * 10000) / 10000});
+            this.marks.push({
+                name: element.name,
+                mark: Math.round((score / this.expertsData.length) * 10000) / 10000,
+                votes: element.votes
+            });
         });
     }
 
@@ -36,3 +40,15 @@ class Marks {
 }
 
 export default Marks;
+
+function compare(a, b) {
+    if (b.mark === a.mark) {
+        if (b.votes[-2].length === a.votes[-2].length) {
+            return a.votes[-1].length - b.votes[-1].length;
+        } else {
+            return a.votes[-2].length - b.votes[-2].length;
+        }
+    }
+
+    return b.mark - a.mark;
+}

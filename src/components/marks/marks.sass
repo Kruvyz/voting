@@ -1,5 +1,7 @@
+@import '../../styles/color.sass';
+
 .marks
-    margin: 0 100px;
+    margin: 0px 100px 0px 135px;
 
     &__elem
         margin: 5px 0;
@@ -8,9 +10,23 @@
 
 .mark
     &__line
-        background: grey
         margin: 0 10px;
-    
+        width: 400px
+        position: relative
+        height: 25px
+
+        &-positive
+            background: $dark-green
+            left: 200px
+
+        &-negative
+            background: $dark-red
+            right: 200px
+
+        > *
+            height: 100%
+            position: absolute
+        
     &__name
         width: 70px
         text-overflow: ellipsis

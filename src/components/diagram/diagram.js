@@ -19,14 +19,14 @@ class Diagram {
 
         this.$el.find('.js-diagram').each((index, element) => {
             $(element).children().each((i, e) => {
-                let width = (data[index].votes[5 - i].length / countExperts) * 200;
+                let width = (data[index].votes[i - 2].length / countExperts) * 200;
                 let ident = 200 - width / 2;
                 let $value = $(e).find('.diagram-block__value');
 
                 if (i == 2) $(e).css('left', ident); 
                 $(e).width(width ? width : 0);
 
-                $value.html(data[index].votes[5 - i].length);                                 
+                $value.html(data[index].votes[i - 2].length);                                 
 
                 if (i < 2) {
                     $value.css('right', -15);
