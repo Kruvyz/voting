@@ -26,7 +26,7 @@ class Winner {
             }
         });
 
-        this.$el.html("Перемога: " + this.candidatesData[winner].name);
+        this.$el.html("Найкраща альтернатива: " + this.candidatesData[winner].name);
     }
 }
 

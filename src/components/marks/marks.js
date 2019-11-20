@@ -22,7 +22,7 @@ class Marks {
                 score += i * element.votes[i].length;
             }
 
-            this.marks.push({name: element.name, mark: score / this.expertsData.length});
+            this.marks.push({name: element.name, mark: Math.round((score / this.expertsData.length) * 10000) / 10000});
         });
     }
 
