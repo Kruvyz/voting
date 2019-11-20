@@ -26,27 +26,27 @@ class Voting {
           <div class="voting__card">
             <p class="voting__card-title" title="${element.name}">${element.name}</p>
             <div class="voting__card-form">
-              <div>
+              <div class="voting__card-item">
                 <input id="${"vote-first" + id}" type="radio" value="5" name="${id}"/>
                 <label for="${"vote-first" + id}">Категорично за</label>
               </div>
   
-              <div>
+              <div class="voting__card-item">
                 <input id="${"vote-second" + id}" type="radio" value="4" name="${id}"/>
                 <label for="${"vote-second" + id}">За</label>
               </div>
   
-              <div>
+              <div class="voting__card-item">
                 <input id="${"vote-third" + id}" type="radio" value="3" name="${id}" checked="checked"/>
                 <label for="${"vote-third" + id}">Байдуже</label>
               </div>
   
-              <div>
+              <div class="voting__card-item">
                 <input id="${"vote-fourth" + id}" type="radio" value="2" name="${id}"/>
                 <label for="${"vote-fourth" + id}">Проти</label>
               </div>
   
-              <div>
+              <div class="voting__card-item">
                 <input id="${"vote-fifth" + id}" type="radio" value="1" name="${id}"/>
                 <label for="${"vote-fifth" + id}">Категорично проти</label>
               </div>
