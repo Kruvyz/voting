@@ -8,17 +8,24 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-start;
-        margin-bottom: 20px;    
+        margin-bottom: 65px;    
         margin-right: -15px;
         padding: 0 20px;
 
         +media-mobile
             flex-direction: column
 
+        &__button
+            position: absolute
+            bottom: 20px
+            left: 50%
+            transform: translateX(-50%)
+
     &__card 
         width: 30%;
         text-align: left;
-        margin-right: 15px;     
+        margin-right: 15px;
+        margin-bottom: 10px    
 
         +media-mobile
             width: 100%
@@ -47,3 +54,4 @@
 
         &:hover
             background: rgba(0, 0, 0, 0.2)
+        
