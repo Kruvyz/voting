@@ -18,7 +18,7 @@ class Voting {
     }
   
     render() {
-      $('.js-voting-expert-name').html("Голосує: " + this.experts[this.currentVote].name);
+      $('.js-voting-expert-name').html("Експерт: " + this.experts[this.currentVote].name);
 
       window.candidates.forEach((element, index) => {
         const id = element.name + index;
