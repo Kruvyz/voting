@@ -61,7 +61,7 @@ class Voting {
         .on('voting-show', (e, count) => {
           this.expertsCount = count;
           this.hide();
-          this.expertName.show(); 
+          $(document).trigger('show-popup');
         })
         .on('get-expert-name', (e, name) => {
           this.experts.push({name, votes: {}});           
@@ -70,8 +70,7 @@ class Voting {
         })
         .on('get-expert-name-show', () => {
           this.hide();
-          this.expertName.reset();
-          this.expertName.show(); 
+          $(document).trigger('show-popup');
         });
 
       this.$el.on('submit', e => {
@@ -79,13 +78,14 @@ class Voting {
 
         this.getVotes();
         this.$votingCards.html(''); 
-        this.currentVote++;  
+        this.currentVote++;
         
         if (this.currentVote >= this.expertsCount) {
           this.hide();
           localStorage.setItem('candidates', JSON.stringify(window.candidates));
           localStorage.setItem('experts', JSON.stringify(this.experts));  
           window.location.assign(window.location.origin + '/result');        
+     
           return;
         }
 

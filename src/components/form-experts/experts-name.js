@@ -11,7 +11,12 @@ class ExpertsName {
     }
 
     reset() {
-        this.$input.val('');
+        fetch('/voting-expert', { method: 'get' })
+            .then(response => response.json())
+            .then(data => {
+                const value = data.value / 10 > 1 ? data.value : '0' + data.value;
+                this.$input.val(value);
+            });
     }
 
     initListeners() {
@@ -24,6 +29,7 @@ class ExpertsName {
         });
 
         $(document).on('show-popup', () => {
+            fetch('/voting-expert', {method: 'post'});            
             this.reset();
             this.show();
         })
