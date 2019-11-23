@@ -26,7 +26,7 @@ class Winner {
             }
         });
 
-        this.$el.html("Найкраща альтернатива: " + this.candidatesData[winner].name);
+        this.$el.html(`<span class="font-color-5">Найкраща альтернатива:</span> ${this.candidatesData[winner].name}`);
     }
 }
 
