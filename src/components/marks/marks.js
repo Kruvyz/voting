@@ -9,6 +9,8 @@ class Marks {
     }
 
     init() {
+        if (!this.$el.length) return;
+        
         this.getMarks();
         this.marks.sort(compare)
         this.render();

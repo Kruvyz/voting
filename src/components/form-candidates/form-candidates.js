@@ -7,6 +7,8 @@ class FormCandidates {
     }
   
     init() {
+      if (!this.$el.length) return;
+      
       this.initListeners();
       fetch('/voting-expert', {method: 'put'});
     }

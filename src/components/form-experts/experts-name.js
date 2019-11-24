@@ -6,6 +6,8 @@ class ExpertsName {
     }
 
     init() {
+        if (!this.$el.length) return;
+        
         this.hide();
         this.initListeners();
     }

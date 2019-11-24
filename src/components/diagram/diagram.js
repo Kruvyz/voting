@@ -9,6 +9,8 @@ class Diagram {
     }
 
     init() {
+        if (!this.$el.length) return;
+        
         this.show(this.candidatesData, this.expertsData.length);
     }
 

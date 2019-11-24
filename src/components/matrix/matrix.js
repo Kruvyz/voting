@@ -6,6 +6,8 @@ class Matrix {
     }
 
     init() {
+        if (!this.$el.length) return;
+        
         this.render();
     }
 

@@ -6,6 +6,8 @@ class Winner {
     }
 
     init() {
+        if (!this.$el.length) return;
+        
         this.findWinner();
     }
 

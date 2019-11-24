@@ -12,6 +12,8 @@ class Voting {
     }
   
     init() {
+      if (!this.$el.length) return;
+      
       this.initListeners();
       this.expertName.init();
       this.hide();
