@@ -19,6 +19,10 @@ app.get('/result', function (req, res) {
   res.render('diagram-page');
 });
 
+app.get('/vote', function(req, res) {
+  res.render('voting-page');
+});
+
 app.post('/voting-expert', function(req, res) {
   votingExpert++;
 });

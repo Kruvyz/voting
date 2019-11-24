@@ -8,17 +8,18 @@ class ExpertsName {
     init() {
         if (!this.$el.length) return;
         
-        this.hide();
+        fetch('/voting-expert', { method: 'post' });
+        this.setName();
         this.initListeners();
     }
 
-    reset() {
+    setName() {
         fetch('/voting-expert', { method: 'get' })
             .then(response => response.json())
             .then(data => {
                 const value = data.value / 10 > 1 ? data.value : '0' + data.value;
                 this.$input.val(value);
-            });
+        });
     }
 
     initListeners() {
@@ -29,12 +30,6 @@ class ExpertsName {
             $(document).trigger('get-expert-name', name);
             this.hide();
         });
-
-        $(document).on('show-popup', () => {
-            fetch('/voting-expert', {method: 'post'});            
-            this.reset();
-            this.show();
-        })
     }
 
     show() {

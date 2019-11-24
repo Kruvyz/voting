@@ -11,6 +11,7 @@ class FormCandidates {
       
       this.initListeners();
       fetch('/voting-expert', {method: 'put'});
+      localStorage.setItem('experts', '[]');
     }
   
     hide() {
@@ -40,10 +41,10 @@ class FormCandidates {
       $(`.js-name-list`).on('submit', (e) => {
         e.preventDefault();
         const $names = $(`.${SETTINGS.SELECTOR.INPUT_NAME}`);
-        window.candidates = [];
+        let candidates = [];
     
         $names.each((index, element) => {
-          window.candidates.push({ 
+          candidates.push({ 
             name: element.value,
             votes: {
               "-2": [],
@@ -56,7 +57,8 @@ class FormCandidates {
         });
   
         this.hide();
-        $(document).trigger('form-experts-show');
+        localStorage.setItem('candidates', JSON.stringify(candidates));
+        window.location.assign(window.location.origin + '/vote');
       });
     }
   }
