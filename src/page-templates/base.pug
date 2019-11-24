@@ -1,3 +1,5 @@
+include ../components/logo/logo
+
 doctype html
 html(lang="uk")
   head
@@ -6,8 +8,7 @@ html(lang="uk")
   body
     .container
       header
-        div
-          img.logo(src="/images/logo.png" alt="logo")
+        +logo  
         div
           a(href="/") Почати голосування
           a(href="/result") Переглянути результат

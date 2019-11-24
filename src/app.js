@@ -5,6 +5,7 @@ import './components/diagram/diagram.sass';
 import './components/matrix/matrix.sass';
 import './components/marks/marks.sass';
 import './styles/button.sass';
+import './components/logo/logo.sass';
 
 import FormCandidates from './components/form-candidates/form-candidates';
 import FormExperts from './components/form-experts/form-experts';
