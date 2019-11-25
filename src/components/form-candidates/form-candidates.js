@@ -1,4 +1,5 @@
 import { FORM_CANDIDATES_SETTINGS as SETTINGS } from './settings';
+import { addCandidate, deleteCandidates, deleteExperts } from '../../service/data';
 import renderForm from './form-candidates.pug';
 
 class FormCandidates {
@@ -11,7 +12,8 @@ class FormCandidates {
       
       this.initListeners();
       fetch('/voting-expert', {method: 'put'});
-      localStorage.setItem('experts', '[]');
+      // deleteCandidates();
+      deleteExperts();
     }
   
     hide() {
@@ -57,7 +59,7 @@ class FormCandidates {
         });
   
         this.hide();
-        localStorage.setItem('candidates', JSON.stringify(candidates));
+        addCandidate(candidates);
         window.location.assign(window.location.origin + '/vote');
       });
     }

@@ -8,7 +8,6 @@ import './styles/button.sass';
 import './components/logo/logo.sass';
 
 import FormCandidates from './components/form-candidates/form-candidates';
-import FormExperts from './components/form-experts/form-experts';
 import Voting from './components/voting/voting';
 import Diagram from './components/diagram/diagram';
 import Matrix from './components/matrix/matrix';
@@ -17,9 +16,6 @@ import Marks from './components/marks/marks';
 
 const formCandidates = new FormCandidates('.js-form-candidates');
 formCandidates.init();
-
-const formExperts = new FormExperts('.js-form-experts');
-formExperts.init();
 
 const voting = new Voting('.js-voting');
 voting.init();

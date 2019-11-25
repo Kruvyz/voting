@@ -1,14 +1,18 @@
+import { getExperts, getCandidates } from '../../service/data';
+
 class Matrix {
     constructor(el) {
         this.$el = $(el);
-        this.matrix = JSON.parse(localStorage.getItem('experts'));
-        this.candidates = JSON.parse(localStorage.getItem('candidates'));
+        this.matrix = [];
+        this.candidates = [];
     }
 
     init() {
         if (!this.$el.length) return;
         
-        this.render();
+        this.getData().then(() => {
+            this.render();
+        });
     }
 
     render() {
@@ -34,6 +38,11 @@ class Matrix {
             this.$el.append(row);
             this.$el.append(emptyRow);
         });
+    }
+
+    async getData() {
+        this.matrix = await getExperts();
+        this.candidates = await getCandidates();
     }
 }
 

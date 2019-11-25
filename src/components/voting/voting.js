@@ -1,4 +1,5 @@
 import ExpertName from '../form-experts/experts-name';
+import { addCandidate, addExpert, getCandidates } from '../../service/data';
 
 class Voting {
     constructor(el) {
@@ -6,9 +7,8 @@ class Voting {
       this.$votingCards = this.$el.find('.js-voting-cards');
       this.$votingExpert = $('.js-voting-expert-name');
       this.expertName = new ExpertName('.js-form-expert-name');
-      this.candidates = JSON.parse(localStorage.getItem('candidates'));
+      this.candidates = [];
       this.currentExpert = {};
-      this.experts = JSON.parse(localStorage.getItem('experts')) || [];
       this.$buttons = $('.js-navigate-buttons');
     }
   
@@ -16,9 +16,12 @@ class Voting {
       if (!this.$el.length) return;
       
       this.$buttons.hide();
-      this.initListeners();
-      this.expertName.init();
-      this.hide();
+      this.hide();      
+      
+      this.getData().then(() => {
+        this.initListeners();
+        this.expertName.init();
+      })
     }
   
     render() {
@@ -74,8 +77,8 @@ class Voting {
         this.getVotes();
         this.hide();
 
-        localStorage.setItem('candidates', JSON.stringify(this.candidates));
-        localStorage.setItem('experts', JSON.stringify(this.experts));
+        addCandidate(this.candidates);
+        addExpert(this.currentExpert);
         this.hide();
         this.$buttons.slideToggle();  
       });   
@@ -100,8 +103,10 @@ class Voting {
         this.candidates[i].votes[value].push(this.currentExpert.name);
         this.currentExpert.votes[this.candidates[i].name] = value;
       }
+    }
 
-      this.experts.push(this.currentExpert);
+    async getData() {
+      this.candidates = await getCandidates();
     }
   }
 

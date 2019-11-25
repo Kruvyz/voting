@@ -1,17 +1,20 @@
 import renderPug from './diagram.pug';
+import { getCandidates, getExperts } from '../../service/data';
 
 class Diagram {
     constructor(el) {
         this.$el = $(el);
-        this.candidatesData = JSON.parse(localStorage.getItem('candidates'));
-        this.expertsData = JSON.parse(localStorage.getItem('experts'));        
+        this.candidatesData = [];
+        this.expertsData = [];        
         this.$winner = this.$el.find('.js-winner');
     }
 
     init() {
         if (!this.$el.length) return;
-        
-        this.show(this.candidatesData, this.expertsData.length);
+
+        this.getData().then(() => {
+            this.show(this.candidatesData, this.expertsData.length);
+        });
     }
 
     show(data, countExperts) {
@@ -47,6 +50,11 @@ class Diagram {
         this.$el.find('.js-name').each((i , e) => {
             e.innerHTML = 'Альтернатива: ' + this.candidatesData[i].name;
         });
+    }
+
+    async getData() {
+        this.candidatesData = await getCandidates();
+        this.expertsData = await getExperts();
     }
 }
 
