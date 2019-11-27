@@ -36,10 +36,19 @@ class Marks {
     }
 
     render() {
+        const elementWidth = this.$el.width();
         this.$el.html('');
         
         this.marks.forEach(element => {
             this.$el.append(markPug({ name: element.name, value: element.mark }))
+        });
+
+        this.$el.find('.mark__line .active').each((i, e) => {
+            const $e = $(e);
+            const value = Math.abs($e.data('value'));
+            const width = $e.parent().width();
+
+            $e.width((value / 2) * width / 2);
         });
     }
 

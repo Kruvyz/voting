@@ -1,14 +1,21 @@
 @import '../../styles/color.sass';
+@import '../../styles/media.sass'
 
 .results 
     width: 400px;
     margin: 40px auto;
 
+    +media-mobile
+        width: 300px
+
 .diagram
     position: relative;
     width: 400px;
     height: 150px;
-    margin: 20px;
+    margin: 20px 0;
+
+    +media-mobile
+        width: 300px
 
     &::before
         content: '';
@@ -16,7 +23,7 @@
         height: 100%;
         width: 1px;
         position: absolute;
-        left: 200px;
+        left: 50%;
         background: grey;
         z-index: 1;
 

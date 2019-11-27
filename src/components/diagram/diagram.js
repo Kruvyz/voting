@@ -18,18 +18,20 @@ class Diagram {
     }
 
     show(data, countExperts) {
+        const elementWidth = this.$el.width() / 2;
+
         for (let i = 0; i < data.length; i++) {
             this.$el.append(renderPug);
         }
 
         this.$el.find('.js-diagram').each((index, element) => {
             $(element).children().each((i, e) => {
-                let width = (data[index].votes[2 - i].length / countExperts) * 200;
-                let ident = 200 - width / 2;
+                let width = (data[index].votes[2 - i].length / countExperts) * elementWidth;
+                let ident = elementWidth - width / 2;
                 let $value = $(e).find('.diagram-block__value');
 
                 if (i == 2) $(e).css('left', ident); 
-                $(e).width(width ? width : 0);
+                $(e).width(width ? width - 20 : 0);
 
                 $value.html(data[index].votes[2 - i].length);                                 
 

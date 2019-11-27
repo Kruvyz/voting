@@ -20,8 +20,15 @@ app.get('/', function (req, res) {
   res.render('index');
 });
 
+app.get('/create', function (req, res) {
+  res.render('creating');
+});
+
 app.get('/result', function (req, res) {
-  res.render('diagram-page');
+  if (candidates.length && experts.length)
+    res.render('diagram-page');
+  else
+    res.render('no-result');
 });
 
 app.get('/vote', function(req, res) {

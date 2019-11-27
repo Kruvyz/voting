@@ -63,18 +63,8 @@ header
         align-items: flex-start
 
     a
-        margin: 0 10px 15px
-        padding: 5px 10px
         text-decoration: none
-        cursor: pointer
-        border: 1px solid black
-        border-radius: 10px
-
-        &:visited
-            color: black
-        
-        &:hover
-            background: rgba(255, 255, 255, 0.1)
+        color: inherit
 
 .winner
     font-size: 20px
@@ -93,3 +83,11 @@ footer
 
 .h2
     text-align: center
+
+    +media-mobile
+        font-size: 16px
+
+.image-container
+    text-align: center
+    img
+        width: 80%

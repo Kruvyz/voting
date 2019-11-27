@@ -1,8 +1,13 @@
+@import ./media.sass
+
 .buttons
     padding: 20px 100px
     display: flex
     flex-direction: column
     align-items: flex-end
+
+    +media-mobile
+        padding: 20px 10px
 
     &--horizontical
         flex-direction: row
