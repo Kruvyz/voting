@@ -31,7 +31,7 @@ class Diagram {
                 let $value = $(e).find('.diagram-block__value');
 
                 if (i == 2) $(e).css('left', ident); 
-                $(e).width(width ? width - 20 : 0);
+                $(e).width(width ? width : 0);
 
                 $value.html(data[index].votes[2 - i].length);                                 
 
