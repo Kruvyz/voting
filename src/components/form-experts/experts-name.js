@@ -17,7 +17,7 @@ class ExpertsName {
         fetch('/voting-expert', { method: 'get' })
             .then(response => response.json())
             .then(data => {
-                const value = data.value / 10 > 1 ? data.value : '0' + data.value;
+                const value = data.value / 10 >= 1 ? data.value : '0' + data.value;
                 this.$input.val(value);
         });
     }
