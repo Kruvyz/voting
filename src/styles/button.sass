@@ -1,10 +1,24 @@
+@import ./media.sass
+
 .buttons
     padding: 20px 100px
     display: flex
     flex-direction: column
     align-items: flex-end
 
+    +media-mobile
+        padding: 20px 0
+
+    &--horizontical
+        flex-direction: row
+        justify-content: space-around
+
+        +media-mobile
+            flex-direction: column
+            align-items: center
+
     .button
+        text-align: center
         display: block
         text-decoration: none
         color: black
@@ -12,6 +26,24 @@
         margin: 5px 0px
         border: 1px solid black
         border-radius: 10px
+        
+        +media-mobile
+            width: 90%
 
         &:hover
             background: rgba(0, 0, 0, 0.2)
+
+
+.button
+    padding: 10px 15px
+
+.button-link
+    text-align: center
+    text-decoration: none
+    color: black
+    padding: 5px 10px
+    border: 1px solid black
+    border-radius: 10px
+    width: fit-content
+    +media-mobile
+        width: 90%

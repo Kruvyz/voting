@@ -1,0 +1,9 @@
+extends ../page-templates/base
+
+include ../components/voting/voting
+  
+block body
+    +voting
+    .navigate-buttons.js-navigate-buttons.buttons.buttons--horizontical
+        a.button(href = '/vote') Новий експерт
+        a.button(href = '/result') Переглянути результат

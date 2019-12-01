@@ -3,12 +3,12 @@
   .mark__line
     if value > 0
       .mark__line-negative
-      .mark__line-positive(style="width:" + value * 100 + "px")
-    if value == 0
+      .mark__line-positive.active(data-value=value)
+    else if value == 0
       .mark__line-negative
-      .mark__line-positive(style="width:1px")
+      .mark__line-positive(style="width:1px;background:grey")
     else
-      .mark__line-negative(style="width:" + value * -100 + "px")
+      .mark__line-negative.active(data-value=value)
       .mark__line-positive
       
   .mark__value= value

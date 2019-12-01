@@ -1,4 +1,5 @@
 import ExpertName from '../form-experts/experts-name';
+import { addCandidate, addExpert, getCandidates } from '../../service/data';
 
 class Voting {
     constructor(el) {
@@ -6,21 +7,27 @@ class Voting {
       this.$votingCards = this.$el.find('.js-voting-cards');
       this.$votingExpert = $('.js-voting-expert-name');
       this.expertName = new ExpertName('.js-form-expert-name');
-      this.expertsCount = 0;
-      this.currentVote = 0;
-      this.experts = [];
+      this.candidates = [];
+      this.currentExpert = {};
+      this.$buttons = $('.js-navigate-buttons');
     }
   
     init() {
-      this.initListeners();
-      this.expertName.init();
-      this.hide();
+      if (!this.$el.length) return;
+      
+      this.$buttons.hide();
+      this.hide();      
+      
+      this.getData().then(() => {
+        this.initListeners();
+        this.expertName.init();
+      })
     }
   
     render() {
-      $('.js-voting-expert-name').html("Голосує: " + this.experts[this.currentVote].name);
+      $('.js-voting-expert-name').html("Експерт: " + this.currentExpert.name);
 
-      window.candidates.forEach((element, index) => {
+      this.candidates.forEach((element, index) => {
         const id = element.name + index;
         this.$votingCards.append(`
           <div class="voting__card">
@@ -58,38 +65,22 @@ class Voting {
   
     initListeners() {
       $(document)
-        .on('voting-show', (e, count) => {
-          this.expertsCount = count;
-          this.hide();
-          this.expertName.show(); 
-        })
         .on('get-expert-name', (e, name) => {
-          this.experts.push({name, votes: {}});           
+          this.currentExpert = {name, votes: {}};           
           this.show();
           this.render();
         })
-        .on('get-expert-name-show', () => {
-          this.hide();
-          this.expertName.reset();
-          this.expertName.show(); 
-        });
 
       this.$el.on('submit', e => {
         e.preventDefault();
 
         this.getVotes();
-        this.$votingCards.html(''); 
-        this.currentVote++;  
-        
-        if (this.currentVote >= this.expertsCount) {
-          this.hide();
-          localStorage.setItem('candidates', JSON.stringify(window.candidates));
-          localStorage.setItem('experts', JSON.stringify(this.experts));  
-          window.location.assign(window.location.origin + '/result');        
-          return;
-        }
+        this.hide();
 
-        $(document).trigger('get-expert-name-show');           
+        addCandidate(this.candidates);
+        addExpert(this.currentExpert);
+        this.hide();
+        this.$buttons.slideToggle();  
       });   
     }
   
@@ -104,14 +95,18 @@ class Voting {
     }
 
     getVotes() {
-      let count = window.candidates.length;
+      let count = this.candidates.length;
       let values = [];
 
       for (let i = 0; i < count; i++) {
-        let value = this.$votingCards.find(`input[name="${window.candidates[i].name + i}"]:checked`).val();
-        window.candidates[i].votes[value].push(this.experts[this.currentVote].name);
-        this.experts[this.currentVote].votes[window.candidates[i].name] = value;
+        let value = this.$votingCards.find(`input[name="${this.candidates[i].name + i}"]:checked`).val();
+        this.candidates[i].votes[value].push(this.currentExpert.name);
+        this.currentExpert.votes[this.candidates[i].name] = value;
       }
+    }
+
+    async getData() {
+      this.candidates = await getCandidates();
     }
   }
 

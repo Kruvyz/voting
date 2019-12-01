@@ -1,4 +1,5 @@
 import { FORM_CANDIDATES_SETTINGS as SETTINGS } from './settings';
+import { addCandidate, deleteCandidates, deleteExperts } from '../../service/data';
 import renderForm from './form-candidates.pug';
 
 class FormCandidates {
@@ -7,7 +8,12 @@ class FormCandidates {
     }
   
     init() {
+      if (!this.$el.length) return;
+      
       this.initListeners();
+      fetch('/voting-expert', {method: 'put'});
+      // deleteCandidates();
+      deleteExperts();
     }
   
     hide() {
@@ -26,7 +32,7 @@ class FormCandidates {
           $div.append(`
             <div class="form-candidates__name-item">
               <label for=${i}>Альтернатива ${i + 1}</label>
-              <input id=${i} class="form-candidates__name-input ${SETTINGS.SELECTOR.INPUT_NAME}" type="text" required maxlength="50">
+              <input id=${i} class="form-candidates__name-input ${SETTINGS.SELECTOR.INPUT_NAME}" value="a${i + 1}" type="text" required maxlength="50">
             </div>
             `);
         }
@@ -37,10 +43,10 @@ class FormCandidates {
       $(`.js-name-list`).on('submit', (e) => {
         e.preventDefault();
         const $names = $(`.${SETTINGS.SELECTOR.INPUT_NAME}`);
-        window.candidates = [];
+        let candidates = [];
     
         $names.each((index, element) => {
-          window.candidates.push({ 
+          candidates.push({ 
             name: element.value,
             votes: {
               "-2": [],
@@ -53,7 +59,8 @@ class FormCandidates {
         });
   
         this.hide();
-        $(document).trigger('form-experts-show');
+        addCandidate(candidates);
+        window.location.assign(window.location.origin + '/vote');
       });
     }
   }

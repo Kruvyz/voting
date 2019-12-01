@@ -4,11 +4,11 @@ include ../components/diagram/diagrams
 include ../components/matrix/matrix
 
 block body
-    .winner.js-winner
-    +matrix    
-    +diagram
-    h2.h2.winner Результуюче ранжування альтернатив
+    .winner.js-winner.font-color-5
+    h2.h2.label Результати колективної експертизи
     .js-marks.marks
+    +diagram
+    +matrix
     .buttons
-        a(class="button", href="/") Почати нове голосування
-        a(class="button", href="/result") Переглянути результати        
+        a(class="button", href="/create") Почати нове голосування
+        a(class="button", style="", href="/vote") Новий експерт        

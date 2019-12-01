@@ -1,12 +1,18 @@
+import { getCandidates, getExperts } from '../../service/data';
+
 class Winner {
     constructor(el) {
         this.$el = $(el);
-        this.candidatesData = JSON.parse(localStorage.getItem('candidates'));
-        this.expertsData = JSON.parse(localStorage.getItem('experts'));    
+        this.candidatesData = [];
+        this.expertsData = [];    
     }
 
     init() {
-        this.findWinner();
+        if (!this.$el.length) return;
+        
+        this.getData().then(() => {
+            this.findWinner();
+        });
     }
 
     findWinner() {
@@ -26,7 +32,12 @@ class Winner {
             }
         });
 
-        this.$el.html("Найкраща альтернатива: " + this.candidatesData[winner].name);
+        this.$el.html(`<span class="font-color-5">Найкраща альтернатива:</span> ${this.candidatesData[winner].name}`);
+    }
+
+    async getData() {
+        this.candidatesData = await getCandidates();
+        this.expertsData = await getExperts();
     }
 }
 

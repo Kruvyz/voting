@@ -1,11 +1,16 @@
 extends ../page-templates/base
 
-include ../components/form-candidates/form-candidates
-include ../components/form-experts/form-experts
-include ../components/voting/voting
+include ../components/accordion/accordion
 
 block body
-  +form-candidates
-  +form-experts
-  +voting
-  
+    .h2.label(style="margin-bottom: 20px;") Комп'ютерна система колективної експертизи
+    .image-container
+        img(src="/images/business.jpg")
+
+    +accordion('Дізнатись більше')
+        p двалівоаоівдлоа ідвоадліво длаоіво адліво ідвлаодлівоалд ідлвад оівлдао лві
+
+    .buttons.buttons--horizontical
+        a.button(href="/create") Почати голосування
+        a.button(href="/result") Переглянути результати
+        

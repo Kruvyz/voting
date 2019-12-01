@@ -5,20 +5,20 @@ import './components/diagram/diagram.sass';
 import './components/matrix/matrix.sass';
 import './components/marks/marks.sass';
 import './styles/button.sass';
+import './components/logo/logo.sass';
+import './components/accordion/accordion.sass';
 
 import FormCandidates from './components/form-candidates/form-candidates';
-import FormExperts from './components/form-experts/form-experts';
 import Voting from './components/voting/voting';
 import Diagram from './components/diagram/diagram';
 import Matrix from './components/matrix/matrix';
 import Winner from './components/winner/winner';
 import Marks from './components/marks/marks';
+import Accordion from './components/accordion/accordion';
+
 
 const formCandidates = new FormCandidates('.js-form-candidates');
 formCandidates.init();
-
-const formExperts = new FormExperts('.js-form-experts');
-formExperts.init();
 
 const voting = new Voting('.js-voting');
 voting.init();
@@ -34,3 +34,6 @@ winner.init();
 
 const marks = new Marks('.js-marks');
 marks.init();
+
+const accordion = new Accordion('.accordion');
+accordion.init();

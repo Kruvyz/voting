@@ -1,22 +1,22 @@
+include ../components/logo/logo
+
 doctype html
 html(lang="uk")
   head
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
     title Голосування
   body
     .container
       header
-        div
-          img.logo(src="/images/logo.png" alt="logo")
-        div
-          a(href="/") Почати голосування
-          a(href="/result") Переглянути результат
+        a(href="/")
+          +logo  
         
       block body
 
     footer
-      | © IT-TRIBUS, 2019 
+      | © CollExpert5, 2020
       br
-      | Колодний В.В, Мельник С.М
+      | Колодний В.В., Мельник С.М.,
       br
       | Яцько А.А. 
 
