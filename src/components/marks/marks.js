@@ -36,6 +36,7 @@ class Marks {
     }
 
     render() {
+        const maxValue = Math.max(...this.marks.map(val => Math.abs(+val.mark)));
         const elementWidth = this.$el.width();
         this.$el.html('');
         
@@ -48,7 +49,7 @@ class Marks {
             const value = Math.abs($e.data('value'));
             const width = $e.parent().width();
 
-            $e.width((value / 2) * width / 2);
+            $e.width((value / maxValue) * width / 2);
         });
     }
 

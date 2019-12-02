@@ -10,6 +10,7 @@ class FormCandidates {
     init() {
       if (!this.$el.length) return;
       
+      this.hide();
       this.initListeners();
       fetch('/voting-expert', {method: 'put'});
       // deleteCandidates();
@@ -59,9 +60,15 @@ class FormCandidates {
         });
   
         this.hide();
-        addCandidate(candidates);
-        window.location.assign(window.location.origin + '/vote');
+        addCandidate(candidates)
+          .then(id => {
+            window.location.assign(`${window.location.origin}/vote`);
+          });
       });
+
+      $(document).on('create-candidates', () => {
+        this.$el.show();
+      })
     }
   }
 

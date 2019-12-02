@@ -2,6 +2,13 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
+const {
+  getResultsById,
+  getResults,
+  addResultToResults,
+  updateResultToResults
+} = require('./mongo');
+
 const port = process.env.PORT || 3000;
 
 let votingExpert = 0;
@@ -63,10 +70,23 @@ app.get('/candidates', function(req, res) {
   res.json(candidates);
 });
 
-app.put('/candidates', function(req, res) {
-  candidates = [...req.body.candidate];
-  res.sendStatus(200)
+app.post('/candidates', function(req, res) {
+  const candidate = req.body.candidate;
+
+  candidates = [...candidate]
+  res.sendStatus(200);
+  // addResultToResults({ ...candidates, experts: [] })
+  //   .then(id => console.log(res.json({id, name: "ffff"})))
+  //   .catch(error => {
+  //     console.error(error.message);
+  //   });
+  //   res.json({name: 'dddd'});
 });
+
+app.post('/a', function(req, res) {
+  console.log('------------------');
+  res.json({f: 'dd'});
+})
 
 app.delete('/candidates', function(req, res) {
   candidates = [];

@@ -3,14 +3,14 @@ extends ../page-templates/base
 include ../components/accordion/accordion
 
 block body
-    .h2.label(style="margin-bottom: 20px;") Комп'ютерна система колективної експертизи
-    .image-container
-        img(src="/images/business.jpg")
+    .h2.label(style="margin-bottom: 20px; text-transform:uppercase;font-size:35px;margin-top:150px") Комп'ютерна система 
+        br 
+        | колективної експертизи
 
-    +accordion('Дізнатись більше')
-        p двалівоаоівдлоа ідвоадліво длаоіво адліво ідвлаодлівоалд ідлвад оівлдао лві
+    //- +accordion('Дізнатись більше')
+    //-     p двалівоаоівдлоа ідвоадліво длаоіво адліво ідвлаодлівоалд ідлвад оівлдао лві
 
     .buttons.buttons--horizontical
-        a.button(href="/create") Почати голосування
+        a.button(href="/create") Нова експертиза
         a.button(href="/result") Переглянути результати
         

@@ -27,7 +27,7 @@ export async function getCandidates() {
 
 export async function addCandidate(candidate) {
     await fetch('/candidates', { 
-        method: 'put',
+        method: 'post',
         headers: {
             'Content-Type': 'application/json'
         },

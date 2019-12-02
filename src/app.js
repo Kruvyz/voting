@@ -7,6 +7,7 @@ import './components/marks/marks.sass';
 import './styles/button.sass';
 import './components/logo/logo.sass';
 import './components/accordion/accordion.sass';
+import './components/form-name/form-name.sass';
 
 import FormCandidates from './components/form-candidates/form-candidates';
 import Voting from './components/voting/voting';
@@ -15,6 +16,7 @@ import Matrix from './components/matrix/matrix';
 import Winner from './components/winner/winner';
 import Marks from './components/marks/marks';
 import Accordion from './components/accordion/accordion';
+import FormName from './components/form-name/form-name';
 
 
 const formCandidates = new FormCandidates('.js-form-candidates');
@@ -37,3 +39,6 @@ marks.init();
 
 const accordion = new Accordion('.accordion');
 accordion.init();
+
+const formName = new FormName('.js-form-name');
+formName.init();
