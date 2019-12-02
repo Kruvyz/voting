@@ -1,10 +1,10 @@
 const { MongoClient, ObjectId } = require("mongodb");
 
-const url = 'mongodb://localhost:27017';
+const url = process.env.MONGODB_URI || 'mongodb://localhost:27017';
 const databaseName = 'voting';
 const collectionName = 'results';
 
-async function getResultsById(id, elementName) {
+async function getResultsById(id) {
   const client = await MongoClient.connect(url, { useUnifiedTopology: true });
 
   const db = client.db(databaseName);
@@ -14,10 +14,10 @@ async function getResultsById(id, elementName) {
 
   await client.close();
 
-  return findData[elementName];
+  return findData;
 }
 
-async function addResultToResults(element) {
+async function addResultToResults(id, elementName, element) {
   const client = await MongoClient.connect(url, { useUnifiedTopology: true });
 
   const db = client.db(databaseName);
@@ -36,7 +36,18 @@ async function updateResultToResults(id, elementName, element) {
     const db = client.db(databaseName);
     const collection = db.collection(collectionName);
   
-    await collection.update({_id: ObjectId(id)}, { $push: { [elementName]: element}});
+    await collection.updateOne({_id: ObjectId(id)}, { $push: { [elementName]: element}});
+  
+    await client.close();
+}
+
+async function changeResultToResults(id, elementName, element) {
+    const client = await MongoClient.connect(url, { useUnifiedTopology: true });
+  
+    const db = client.db(databaseName);
+    const collection = db.collection(collectionName);
+  
+    await collection.updateOne({_id: ObjectId(id)}, { $set: { [elementName]: element}});
   
     await client.close();
 }
@@ -58,5 +69,6 @@ module.exports = {
   getResultsById,
   getResults,
   addResultToResults,
-  updateResultToResults
+  updateResultToResults,
+  changeResultToResults
 }

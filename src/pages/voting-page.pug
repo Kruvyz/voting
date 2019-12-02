@@ -5,5 +5,5 @@ include ../components/voting/voting
 block body
     +voting
     .navigate-buttons.js-navigate-buttons.buttons.buttons--horizontical
-        a.button(href = '/vote') Новий експерт
-        a.button(href = '/result') Переглянути результат
+        a.button(href = '' onclick='javascript:window.location.reload(true)') Новий експерт
+        a.button(href = '/result/' + id) Переглянути результат

@@ -1,5 +1,5 @@
 import ExpertName from '../form-experts/experts-name';
-import { addCandidate, addExpert, getCandidates } from '../../service/data';
+import { updateCandidate, addExpert, getCandidates } from '../../service/data';
 
 class Voting {
     constructor(el) {
@@ -10,6 +10,7 @@ class Voting {
       this.candidates = [];
       this.currentExpert = {};
       this.$buttons = $('.js-navigate-buttons');
+      this.id = window.location.pathname.split('/')[2];
     }
   
     init() {
@@ -77,8 +78,8 @@ class Voting {
         this.getVotes();
         this.hide();
 
-        addCandidate(this.candidates);
-        addExpert(this.currentExpert);
+        updateCandidate(this.id, this.candidates);
+        addExpert(this.id, this.currentExpert);
         this.hide();
         this.$buttons.slideToggle();  
       });   
@@ -106,7 +107,7 @@ class Voting {
     }
 
     async getData() {
-      this.candidates = await getCandidates();
+      this.candidates = await getCandidates(this.id);
     }
   }
 

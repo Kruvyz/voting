@@ -12,9 +12,6 @@ class FormCandidates {
       
       this.hide();
       this.initListeners();
-      fetch('/voting-expert', {method: 'put'});
-      // deleteCandidates();
-      deleteExperts();
     }
   
     hide() {
@@ -60,9 +57,10 @@ class FormCandidates {
         });
   
         this.hide();
-        addCandidate(candidates)
-          .then(id => {
-            window.location.assign(`${window.location.origin}/vote`);
+        addCandidate({candidates, name})
+          .then(response => response.json())
+          .then(result => {
+            window.location.assign(`${window.location.origin}/vote/${result.id}`);
           });
       });
 

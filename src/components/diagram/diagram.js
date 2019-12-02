@@ -12,9 +12,8 @@ class Diagram {
     init() {
         if (!this.$el.length) return;
 
-        this.getData().then(() => {
-            this.show(this.candidatesData, this.expertsData.length);
-        });
+        this.getData();
+        this.show(this.candidatesData, this.expertsData.length);
     }
 
     show(data, countExperts) {
@@ -54,9 +53,10 @@ class Diagram {
         });
     }
 
-    async getData() {
-        this.candidatesData = await getCandidates();
-        this.expertsData = await getExperts();
+    getData() {
+        const data = JSON.parse($('#data').text());
+        this.candidatesData = data.candidates;
+        this.expertsData = data.experts;
     }
 }
 

@@ -10,9 +10,8 @@ class Matrix {
     init() {
         if (!this.$el.length) return;
         
-        this.getData().then(() => {
-            this.render();
-        });
+        this.getData();
+        this.render();        
     }
 
     render() {
@@ -40,9 +39,11 @@ class Matrix {
         });
     }
 
-    async getData() {
-        this.matrix = await getExperts();
-        this.candidates = await getCandidates();
+    getData() {
+        const data = JSON.parse($('#data').text());
+        
+        this.matrix = data.experts;
+        this.candidates = data.candidates;
     }
 }
 

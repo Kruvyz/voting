@@ -10,9 +10,8 @@ class Winner {
     init() {
         if (!this.$el.length) return;
         
-        this.getData().then(() => {
-            this.findWinner();
-        });
+        this.getData();
+        this.findWinner();
     }
 
     findWinner() {
@@ -35,9 +34,11 @@ class Winner {
         this.$el.html(`<span class="font-color-5">Найкраща альтернатива:</span> ${this.candidatesData[winner].name}`);
     }
 
-    async getData() {
-        this.candidatesData = await getCandidates();
-        this.expertsData = await getExperts();
+    getData() {
+        const data = JSON.parse($('#data').text());
+        
+        this.candidatesData = data.candidates;
+        this.expertsData = data.experts;
     }
 }
 

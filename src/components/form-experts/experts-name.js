@@ -3,21 +3,21 @@ class ExpertsName {
         this.$el = $(el);
         this.$button = this.$el.find('.js-form-expert-name-button');
         this.$input = this.$el.find('.js-form-expert-name-input');
+        this.id = window.location.pathname.split('/')[2];
     }
 
     init() {
         if (!this.$el.length) return;
         
-        fetch('/voting-expert', { method: 'post' });
         this.setName();
         this.initListeners();
     }
 
     setName() {
-        fetch('/voting-expert', { method: 'get' })
+        fetch(`/voting-expert/${this.id}`, { method: 'get' })
             .then(response => response.json())
             .then(data => {
-                const value = data.value / 10 >= 1 ? data.value : '0' + data.value;
+                const value = (data.value + 1) / 10 >= 1 ? (data.value + 1) : '0' + (data.value + 1);
                 this.$input.val(value);
         });
     }

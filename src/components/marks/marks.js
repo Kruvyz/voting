@@ -4,6 +4,7 @@ import { getExperts, getCandidates } from '../../service/data';
 class Marks {
     constructor(el) {
         this.$el = $(el);
+        this.$winner = $('.js-winner');
         this.marks = [];
         this.candidatesData = [];
         this.expertsData = [];  
@@ -12,11 +13,10 @@ class Marks {
     init() {
         if (!this.$el.length) return;
         
-        this.getData().then(() => {
-            this.getMarks();
-            this.marks.sort(compare)
-            this.render();
-        });
+        this.getData();
+        this.getMarks();
+        this.marks.sort(compare)
+        this.render();
     }
 
     getMarks() {
@@ -36,6 +36,8 @@ class Marks {
     }
 
     render() {
+        this.$winner.html(`<span class="font-color-5">Найкраща альтернатива:</span> ${this.marks[0].name}`);
+
         const maxValue = Math.max(...this.marks.map(val => Math.abs(+val.mark)));
         const elementWidth = this.$el.width();
         this.$el.html('');
@@ -53,9 +55,10 @@ class Marks {
         });
     }
 
-    async getData() {
-        this.expertsData = await getExperts();
-        this.candidatesData = await getCandidates();
+    getData() {
+        const data = JSON.parse($('#data').text());        
+        this.expertsData = data.experts;
+        this.candidatesData = data.candidates;
     }
 }
 
