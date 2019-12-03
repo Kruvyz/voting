@@ -1,11 +1,11 @@
 const { MongoClient, ObjectId } = require("mongodb");
 
-const url = process.env.MONGODB_URI || 'mongodb://localhost:27017';
+const url = process.env.MONGOLAB_COBALT_URI || 'mongodb://localhost:27017';
 const databaseName = process.env.MONGODB_DB || 'voting';
 const collectionName = 'results';
 
 async function getResultsById(id) {
-  const client = await MongoClient.connect(url);
+  const client = await MongoClient.connect(url, { useUnifiedTopology: true });
 
   const db = client.db(databaseName);
   const collection = db.collection(collectionName);
@@ -18,7 +18,7 @@ async function getResultsById(id) {
 }
 
 async function addResultToResults(id, elementName, element) {
-  const client = await MongoClient.connect(url);
+  const client = await MongoClient.connect(url, { useUnifiedTopology: true });
 
   const db = client.db(databaseName);
   const collection = db.collection(collectionName);
@@ -31,7 +31,7 @@ async function addResultToResults(id, elementName, element) {
 }
 
 async function updateResultToResults(id, elementName, element) {
-    const client = await MongoClient.connect(url);
+    const client = await MongoClient.connect(url, { useUnifiedTopology: true });
   
     const db = client.db(databaseName);
     const collection = db.collection(collectionName);
@@ -42,7 +42,7 @@ async function updateResultToResults(id, elementName, element) {
 }
 
 async function changeResultToResults(id, elementName, element) {
-    const client = await MongoClient.connect(url);
+    const client = await MongoClient.connect(url, { useUnifiedTopology: true });
   
     const db = client.db(databaseName);
     const collection = db.collection(collectionName);
@@ -53,7 +53,7 @@ async function changeResultToResults(id, elementName, element) {
 }
 
 async function getResults() {
-  const client = await MongoClient.connect(url);
+  const client = await MongoClient.connect(url, { useUnifiedTopology: true });
 
   const db = client.db(databaseName);
   const collection = db.collection(collectionName);
