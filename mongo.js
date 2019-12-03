@@ -1,7 +1,7 @@
 const { MongoClient, ObjectId } = require("mongodb");
 
 const url = process.env.MONGODB_URI || 'mongodb://localhost:27017';
-const databaseName = 'voting';
+const databaseName = process.env.MONGODB_DB || 'voting';
 const collectionName = 'results';
 
 async function getResultsById(id) {
