@@ -32,10 +32,11 @@ app.get('/create', function (req, res) {
 });
 
 app.get('/result', function (req, res) {
-  if (candidates.length && experts.length)
-    res.render('diagram-page');
-  else
-    res.render('no-result');
+  res.render('diagram-page');   
+});
+
+app.get('/no-result', function (req, res) {
+  res.render('no-result');
 });
 
 app.get('/vote', function(req, res) {

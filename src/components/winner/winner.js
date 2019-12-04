@@ -1,4 +1,4 @@
-import { getCandidates, getExperts } from '../../service/data';
+import { getCandidates, getExperts, setToStorage, getFromStorage } from '../../service/data';
 
 class Winner {
     constructor(el) {
@@ -36,8 +36,8 @@ class Winner {
     }
 
     async getData() {
-        this.candidatesData = await getCandidates();
-        this.expertsData = await getExperts();
+        this.candidatesData = await getFromStorage('candidates') || [];
+        this.expertsData = await getFromStorage('experts') || [];
     }
 }
 

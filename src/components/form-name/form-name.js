@@ -1,3 +1,5 @@
+import { setToStorage } from '../../service/data'
+
 class FormName {
     constructor(el) {
         this.$el = $(el);
@@ -12,6 +14,7 @@ class FormName {
     initListeners() {
         this.$button.on('click', () => {
             window.name = this.$value.val();
+            setToStorage('name', window.name);
             this.$el.hide();
             $(document).trigger('create-candidates');
         });

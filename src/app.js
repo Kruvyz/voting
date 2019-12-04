@@ -17,6 +17,7 @@ import Winner from './components/winner/winner';
 import Marks from './components/marks/marks';
 import Accordion from './components/accordion/accordion';
 import FormName from './components/form-name/form-name';
+import { getFromStorage } from './service/data';
 
 
 const formCandidates = new FormCandidates('.js-form-candidates');
@@ -42,3 +43,15 @@ accordion.init();
 
 const formName = new FormName('.js-form-name');
 formName.init();
+
+$('.js-redirect-to-results').on('click', (e) => {
+    e.preventDefault();
+    const candidates = getFromStorage('candidates');
+    const experts = getFromStorage('experts');
+
+    if (candidates.length && experts.length) {
+        window.location.replace('/result');
+    } else {
+        window.location.replace('/no-result');
+    }
+})

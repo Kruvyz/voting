@@ -1,4 +1,4 @@
-import { getExperts, getCandidates } from '../../service/data';
+import { getExperts, getCandidates, getFromStorage } from '../../service/data';
 
 class Matrix {
     constructor(el) {
@@ -41,8 +41,8 @@ class Matrix {
     }
 
     async getData() {
-        this.matrix = await getExperts();
-        this.candidates = await getCandidates();
+        this.candidatesData = await getFromStorage('candidates') || [];
+        this.matrix = await getFromStorage('experts') || [];
     }
 }
 

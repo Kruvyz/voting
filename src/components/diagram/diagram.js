@@ -1,5 +1,5 @@
 import renderPug from './diagram.pug';
-import { getCandidates, getExperts } from '../../service/data';
+import { getCandidates, getExperts, getFromStorage } from '../../service/data';
 
 class Diagram {
     constructor(el) {
@@ -55,8 +55,10 @@ class Diagram {
     }
 
     async getData() {
-        this.candidatesData = await getCandidates();
-        this.expertsData = await getExperts();
+        // this.candidatesData = await getCandidates();
+        // this.expertsData = await getExperts();
+        this.candidatesData = await getFromStorage('candidates') || [];
+        this.expertsData = await getFromStorage('experts') || [];
     }
 }
 

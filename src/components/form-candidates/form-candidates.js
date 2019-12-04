@@ -1,5 +1,5 @@
 import { FORM_CANDIDATES_SETTINGS as SETTINGS } from './settings';
-import { addCandidate, deleteCandidates, deleteExperts } from '../../service/data';
+import { addCandidate, deleteCandidates, deleteExperts, setToStorage } from '../../service/data';
 import renderForm from './form-candidates.pug';
 
 class FormCandidates {
@@ -12,9 +12,9 @@ class FormCandidates {
       
       this.hide();
       this.initListeners();
-      fetch('/voting-expert', {method: 'put'});
-      // deleteCandidates();
-      deleteExperts();
+      setToStorage('experts', []);
+      setToStorage('candidates', []);
+      
     }
   
     hide() {
@@ -60,10 +60,8 @@ class FormCandidates {
         });
   
         this.hide();
-        addCandidate(candidates)
-          .then(id => {
-            window.location.assign(`${window.location.origin}/vote`);
-          });
+        setToStorage('candidates', candidates);
+        window.location.assign(`${window.location.origin}/vote`);
       });
 
       $(document).on('create-candidates', () => {

@@ -1,5 +1,5 @@
 import markPug from './mark.pug';
-import { getExperts, getCandidates } from '../../service/data';
+import { getExperts, getCandidates, getFromStorage } from '../../service/data';
 
 class Marks {
     constructor(el) {
@@ -54,8 +54,8 @@ class Marks {
     }
 
     async getData() {
-        this.expertsData = await getExperts();
-        this.candidatesData = await getCandidates();
+        this.candidatesData = await getFromStorage('candidates') || [];
+        this.expertsData = await getFromStorage('experts') || [];
     }
 }
 

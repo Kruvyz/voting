@@ -1,25 +1,24 @@
+import { getFromStorage } from '../../service/data';
+
 class ExpertsName {
     constructor(el) {
         this.$el = $(el);
         this.$button = this.$el.find('.js-form-expert-name-button');
         this.$input = this.$el.find('.js-form-expert-name-input');
+        this.experts = getFromStorage('experts') || [];
     }
 
     init() {
         if (!this.$el.length) return;
         
-        fetch('/voting-expert', { method: 'post' });
         this.setName();
         this.initListeners();
     }
 
     setName() {
-        fetch('/voting-expert', { method: 'get' })
-            .then(response => response.json())
-            .then(data => {
-                const value = data.value / 10 >= 1 ? data.value : '0' + data.value;
-                this.$input.val(value);
-        });
+            const dataValue = this.experts.length;
+            const value = (dataValue + 1) / 10 >= 1 ? dataValue + 1 : '0' + (dataValue + 1);
+            this.$input.val(value);
     }
 
     initListeners() {
