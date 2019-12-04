@@ -46,8 +46,8 @@ formName.init();
 
 $('.js-redirect-to-results').on('click', (e) => {
     e.preventDefault();
-    const candidates = getFromStorage('candidates');
-    const experts = getFromStorage('experts');
+    const candidates = getFromStorage('candidates') || [];
+    const experts = getFromStorage('experts') || [];
 
     if (candidates.length && experts.length) {
         window.location.replace('/result');
@@ -58,7 +58,7 @@ $('.js-redirect-to-results').on('click', (e) => {
 
 $('.js-create-new-voting').on('click', e => {
     e.preventDefault();
-    const experts = getFromStorage('experts');
+    const experts = getFromStorage('experts') || [];
     let res = false;
     
     if (experts.length)
