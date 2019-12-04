@@ -4,11 +4,13 @@ include ../components/diagram/diagrams
 include ../components/matrix/matrix
 
 block body
-    .winner.js-winner.font-color-5
-    h2.h2.label Результати колективної експертизи
+    h2.js-voting-name.h2.label.big-text
+    h2.js-candidates-count.h2.label
+    h2.js-experts-count.h2.label
+    .winner.js-winner
     .js-marks.marks
     +diagram
     +matrix
     .buttons(style="height:100px; justify-content:space-between; padding-top:0")
         a(class="button", style="align-self: center;", href="/vote") Новий експерт            
-        a(class="button", href="/create") Нова експертиза
+        a.js-create-new-voting(class="button", href="/create") Нова експертиза

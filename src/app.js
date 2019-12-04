@@ -54,4 +54,19 @@ $('.js-redirect-to-results').on('click', (e) => {
     } else {
         window.location.replace('/no-result');
     }
-})
+});
+
+$('.js-create-new-voting').on('click', e => {
+    e.preventDefault();
+    const experts = getFromStorage('experts');
+    let res = false;
+    
+    if (experts.length)
+        res = confirm('Результати попередньої експертизи буде втрачено')
+    else
+        window.location.replace('/create');    
+
+    if (res) {
+        window.location.replace('/create');
+    }
+});

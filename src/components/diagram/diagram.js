@@ -13,6 +13,7 @@ class Diagram {
         if (!this.$el.length) return;
 
         this.getData().then(() => {
+            this.candidatesData.sort(compare);
             this.show(this.candidatesData, this.expertsData.length);
         });
     }
@@ -55,11 +56,33 @@ class Diagram {
     }
 
     async getData() {
-        // this.candidatesData = await getCandidates();
-        // this.expertsData = await getExperts();
         this.candidatesData = await getFromStorage('candidates') || [];
         this.expertsData = await getFromStorage('experts') || [];
     }
+
+    getMarks() {
+        this.candidatesData.forEach((element, index) => {
+            let score = 0;
+
+            for (let i in element.votes) {
+                score += i * element.votes[i].length;
+            }
+
+            this.candidatesData.mark = Math.round((score / this.expertsData.length) * 1000) / 1000;
+        });
+    }
+}
+
+function compare(a, b) {
+    if (b.mark === a.mark) {
+        if (b.votes[-2].length === a.votes[-2].length) {
+            return a.votes[-1].length - b.votes[-1].length;
+        } else {
+            return a.votes[-2].length - b.votes[-2].length;
+        }
+    }
+
+    return b.mark - a.mark;
 }
 
 export default Diagram;

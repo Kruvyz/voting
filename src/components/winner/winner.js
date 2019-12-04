@@ -1,4 +1,5 @@
 import { getCandidates, getExperts, setToStorage, getFromStorage } from '../../service/data';
+import { RenderText } from '../texts/text';
 
 class Winner {
     constructor(el) {
@@ -12,6 +13,7 @@ class Winner {
         
         this.getData().then(() => {
             this.findWinner();
+            RenderText();
         });
     }
 
@@ -32,7 +34,7 @@ class Winner {
             }
         });
 
-        this.$el.html(`<span class="font-color-5">Найкраща альтернатива:</span> ${this.candidatesData[winner].name}`);
+        this.$el.html(`Найкраща альтернатива: <span class="font-color-5">${this.candidatesData[winner].name}</span>`);
     }
 
     async getData() {
