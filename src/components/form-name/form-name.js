@@ -12,7 +12,9 @@ class FormName {
     }
 
     initListeners() {
-        this.$button.on('click', () => {
+        this.$el.on('submit', e => {
+            e.preventDefault();
+            
             window.name = this.$value.val();
             setToStorage('name', window.name);
             this.$el.hide();
