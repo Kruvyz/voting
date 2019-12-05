@@ -41,7 +41,7 @@ class Matrix {
     }
 
     async getData() {
-        this.candidatesData = await getFromStorage('candidates') || [];
+        this.candidates = await getFromStorage('candidates') || [];
         this.matrix = await getFromStorage('experts') || [];
     }
 }

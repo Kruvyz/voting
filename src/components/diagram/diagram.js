@@ -13,6 +13,7 @@ class Diagram {
         if (!this.$el.length) return;
 
         this.getData().then(() => {
+            this.getMarks();
             this.candidatesData.sort(compare);
             this.show(this.candidatesData, this.expertsData.length);
         });
@@ -68,7 +69,7 @@ class Diagram {
                 score += i * element.votes[i].length;
             }
 
-            this.candidatesData.mark = Math.round((score / this.expertsData.length) * 1000) / 1000;
+            element.mark = Math.round((score / this.expertsData.length) * 1000) / 1000;
         });
     }
 }

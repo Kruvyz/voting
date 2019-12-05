@@ -80,6 +80,7 @@ class Voting {
 
         setToStorage('candidates', this.candidates);
         setToStorage('experts', this.experts);
+        setToStorage('date', (new Date()).toLocaleString('uk', { timeZone: 'UTC', dateStyle: 'long', timeStyle: 'short' }));
         this.hide();
         this.$buttons.slideToggle();  
       });   
