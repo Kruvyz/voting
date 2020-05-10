@@ -5,18 +5,18 @@ class ExpertsName {
         this.$el = $(el);
         this.$button = this.$el.find('.js-form-expert-name-button');
         this.$input = this.$el.find('.js-form-expert-name-input');
-        this.experts = getFromStorage('experts') || [];
     }
 
-    init() {
+    init(expretsLenght) {
         if (!this.$el.length) return;
         
+        this.expretsLenght = expretsLenght;
         this.setName();
         this.initListeners();
     }
 
     setName() {
-            const dataValue = this.experts.length;
+            const dataValue = this.expretsLenght;
             const value = (dataValue + 1) / 10 >= 1 ? dataValue + 1 : '0' + (dataValue + 1);
             this.$input.val(value);
     }

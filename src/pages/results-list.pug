@@ -1,0 +1,7 @@
+extends ../page-templates/base
+
+block body
+    each vote in votes
+        .vote= vote.name
+            a(class="button", href="/vote/"+vote._id) Голосувати
+            a(class="button", href="/result/"+vote._id) Результат

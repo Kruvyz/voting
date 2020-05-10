@@ -25,24 +25,27 @@ class Matrix {
         }); 
         this.$el.append(tableHeader);
 
-        this.matrix.forEach(element => {
+        this.matrix.forEach((element, index) => {
             const emptyRow = $(document.createElement('tr'));
             emptyRow.addClass('matrix__empty-row');
 
             let row =  $(document.createElement('tr'));
             row.append(`<td class="matrix__name" title="${element.name}"><p>${element.name}</p></td>`);           
             
-            for (let i in element.votes) {
-                row.append(`<td class="color-${+element.votes[i] + 3} colors"></td>`);           
-            }
+            this.candidates.forEach(canditate => {
+                row.append(`<td class="color-${+element.votes[canditate.name] + 3} colors"></td>`);
+            });
+
             this.$el.append(row);
             this.$el.append(emptyRow);
         });
     }
 
     async getData() {
-        this.candidates = await getFromStorage('candidates') || [];
-        this.matrix = await getFromStorage('experts') || [];
+        const { experts, candidates } = JSON.parse($('#data').text());
+
+        this.candidates = candidates;
+        this.matrix = experts;
     }
 }
 

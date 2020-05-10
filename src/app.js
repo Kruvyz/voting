@@ -17,7 +17,6 @@ import Winner from './components/winner/winner';
 import Marks from './components/marks/marks';
 import Accordion from './components/accordion/accordion';
 import FormName from './components/form-name/form-name';
-import { getFromStorage } from './service/data';
 
 
 const formCandidates = new FormCandidates('.js-form-candidates');
@@ -43,30 +42,3 @@ accordion.init();
 
 const formName = new FormName('.js-form-name');
 formName.init();
-
-$('.js-redirect-to-results').on('click', (e) => {
-    e.preventDefault();
-    const candidates = getFromStorage('candidates') || [];
-    const experts = getFromStorage('experts') || [];
-
-    if (candidates.length && experts.length) {
-        window.location.replace('/result');
-    } else {
-        window.location.replace('/no-result');
-    }
-});
-
-$('.js-create-new-voting').on('click', e => {
-    e.preventDefault();
-    const experts = getFromStorage('experts') || [];
-    let res = false;
-    
-    if (experts.length)
-        res = confirm('Результати попередньої експертизи буде втрачено')
-    else
-        window.location.replace('/create');    
-
-    if (res) {
-        window.location.replace('/create');
-    }
-});

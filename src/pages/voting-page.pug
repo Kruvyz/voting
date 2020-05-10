@@ -3,7 +3,7 @@ extends ../page-templates/base
 include ../components/voting/voting
   
 block body
-    +voting
+    +voting(id)
     .navigate-buttons.js-navigate-buttons.buttons.buttons--horizontical
-        a.button(href = '/vote') Новий експерт
-        a.button.js-redirect-to-results(href = '') Переглянути результат
+        a.button(href = '/vote'+id) Новий експерт
+        a.button(href = '/result/'+id) Переглянути результат

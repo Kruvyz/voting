@@ -57,8 +57,10 @@ class Diagram {
     }
 
     async getData() {
-        this.candidatesData = await getFromStorage('candidates') || [];
-        this.expertsData = await getFromStorage('experts') || [];
+        const { experts, candidates } = JSON.parse($('#data').text());
+        
+        this.candidatesData = candidates;
+        this.expertsData = experts;
     }
 
     getMarks() {

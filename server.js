@@ -3,17 +3,13 @@ const path = require('path');
 const app = express();
 
 const {
-  getResultsById,
-  getResults,
-  addResultToResults,
-  updateResultToResults
+  getVoteById,
+  getVotes,
+  addVoteToVotes,
+  updateVoteInVotes
 } = require('./mongo');
 
 const port = process.env.PORT || 3010;
-
-let votingExpert = 0;
-let experts = [];
-let candidates = [];
 
 app.set('views', './src/pages');
 app.set('view engine', 'pug');
@@ -31,66 +27,62 @@ app.get('/create', function (req, res) {
   res.render('creating');
 });
 
-app.get('/result', function (req, res) {
-  res.render('diagram-page');   
+app.get('/result/:id', function (req, res) {
+  const { id } = req.params;
+
+  getVoteById(id)
+    .then(responce => {
+      if (responce.experts.length)
+        res.render('diagram-page', {vote: responce});
+      else
+        res.render('no-result');   
+    });
+
 });
 
-app.get('/no-result', function (req, res) {
-  res.render('no-result');
+app.get('/results', function (req, res) {
+  getVotes()
+    .then(responce => {
+      res.render('results-list', {votes: responce});   
+    });
+
 });
 
-app.get('/vote', function(req, res) {
-  res.render('voting-page');
-});
+app.get('/vote/:id', function(req, res) {
+  const { id } = req.params;
 
-app.post('/voting-expert', function(req, res) {
-  votingExpert++;
+  res.render('voting-page', {id});
 });
 
 app.get('/voting-expert', function(req, res) {
   res.json({value: votingExpert});
 });
 
-app.put('/voting-expert', function(res, req) {
-  votingExpert = 0;
-});
+app.get('/candidates/:id', function(req, res) {
+  const { id } = req.params;
 
-app.get('/experts', function(req, res) {
-  res.json(experts);
-});
-
-app.put('/experts', function(req, res) {
-  experts.push(req.body.expert);
-});
-
-app.delete('/experts', function(req, res) {
-  experts = [];
-});
-
-app.get('/candidates', function(req, res) {
-  res.json(candidates);
+  getVoteById(id)
+    .then(responce => {
+      res.json(responce);
+    });
 });
 
 app.post('/candidates', function(req, res) {
-  const candidate = req.body.candidate;
+  const { vote } = req.body;
 
-  candidates = [...candidate]
-  res.sendStatus(200);
-  // addResultToResults({ ...candidates, experts: [] })
-  //   .then(id => console.log(res.json({id, name: "ffff"})))
-  //   .catch(error => {
-  //     console.error(error.message);
-  //   });
-  //   res.json({name: 'dddd'});
+  addVoteToVotes({ ...vote, experts: [] })
+    .then(id => {
+      res.json(id);
+    })
+    .catch(error => {
+      console.error(error.message);
+    });
 });
 
-app.post('/a', function(req, res) {
-  console.log('------------------');
-  res.json({f: 'dd'});
-})
+app.post('/vote', function(req, res) {
+  const { vote } = req.body;
 
-app.delete('/candidates', function(req, res) {
-  candidates = [];
+  updateVoteInVotes(vote);
 });
 
 app.listen(port, function () {

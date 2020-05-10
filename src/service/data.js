@@ -5,7 +5,7 @@ export async function getExperts() {
     return data;
 }
 
-export async function addExpert(expert) {
+export async function addExpert(expert, id) {
     fetch('/experts', { 
         method: 'put',
         headers: {
@@ -18,31 +18,35 @@ export async function deleteExperts() {
     fetch('/experts', { method: 'delete' });    
 }
 
-export async function getCandidates() {
-    const response = await fetch('/candidates', { method: 'get' });
-    const data =  response.json();
+export async function getVote(id) {
+    const response = await fetch('/candidates/' + id, { method: 'get' });
+    const data =  await response.json();
 
     return data;
 }
 
-export async function addCandidate(candidate) {
-    await fetch('/candidates', { 
+export async function addVote(vote) {
+    const res = await fetch('/candidates', { 
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ candidate })
+        body: JSON.stringify({ vote })
+    });
+
+    return res.json();
+}
+
+export async function updateVote(vote) {
+    await fetch('/vote', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({vote})
     });
 }
 
 export async function deleteCandidates() {
     fetch('/candidates', { method: 'delete' });    
-}
-
-export function setToStorage(name, data) {
-    localStorage.setItem(name, JSON.stringify(data));
-}
-
-export function getFromStorage(name) {
-    return JSON.parse(localStorage.getItem(name));
 }

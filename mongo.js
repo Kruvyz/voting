@@ -2,9 +2,9 @@ const { MongoClient, ObjectId } = require("mongodb");
 
 const url = 'mongodb://localhost:27017';
 const databaseName = 'voting';
-const collectionName = 'results';
+const collectionName = 'vote';
 
-async function getResultsById(id, elementName) {
+async function getVoteById(id) {
   const client = await MongoClient.connect(url, { useUnifiedTopology: true });
 
   const db = client.db(databaseName);
@@ -14,23 +14,23 @@ async function getResultsById(id, elementName) {
 
   await client.close();
 
-  return findData[elementName];
+  return findData;
 }
 
-async function addResultToResults(element) {
+async function addVoteToVotes(element) {
   const client = await MongoClient.connect(url, { useUnifiedTopology: true });
 
   const db = client.db(databaseName);
   const collection = db.collection(collectionName);
 
-  const result = await collection.insertOne(element);
+  const Vote = await collection.insertOne(element);
 
   await client.close();
 
-  return result.insertedId;
+  return Vote.insertedId;
 }
 
-async function updateResultToResults(id, elementName, element) {
+async function updateVoteToVotes(id, elementName, element) {
     const client = await MongoClient.connect(url, { useUnifiedTopology: true });
   
     const db = client.db(databaseName);
@@ -41,7 +41,18 @@ async function updateResultToResults(id, elementName, element) {
     await client.close();
 }
 
-async function getResults() {
+async function updateVoteInVotes({id, ...other}) {
+  const client = await MongoClient.connect(url, { useUnifiedTopology: true });
+
+  const db = client.db(databaseName);
+  const collection = db.collection(collectionName);
+
+  await collection.update({_id: ObjectId(id)}, { $set: other });
+
+  await client.close();
+}
+
+async function getVotes() {
   const client = await MongoClient.connect(url, { useUnifiedTopology: true });
 
   const db = client.db(databaseName);
@@ -55,8 +66,9 @@ async function getResults() {
 }
 
 module.exports = {
-  getResultsById,
-  getResults,
-  addResultToResults,
-  updateResultToResults
+  getVoteById,
+  getVotes,
+  addVoteToVotes,
+  updateVoteToVotes,
+  updateVoteInVotes
 }

@@ -1,8 +1,8 @@
 include ../form-experts/experts-name
 
-mixin voting
+mixin voting(id)
     +expert-name
     .voting-expert-name.js-voting-expert-name.label
-    form.voting.js-voting
+    form.voting.js-voting(data-id= id)
         .voting-cards.js-voting-cards
-        button(class="button voting-cards__button js-voting-button") Підтвердити
+        button(class="button voting-cards__button") Підтвердити

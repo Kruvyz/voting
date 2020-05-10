@@ -1,5 +1,5 @@
 import ExpertName from '../form-experts/experts-name';
-import { addCandidate, addExpert, getCandidates, getFromStorage, setToStorage } from '../../service/data';
+import { addCandidate, addExpert, getVote, updateVote, getFromStorage, setToStorage } from '../../service/data';
 
 class Voting {
     constructor(el) {
@@ -11,6 +11,7 @@ class Voting {
       this.currentExpert = {};
       this.$buttons = $('.js-navigate-buttons');
       this.experts = [];
+      this.voteId = this.$el.data('id');
     }
   
     init() {
@@ -21,7 +22,7 @@ class Voting {
       
       this.getData().then(() => {
         this.initListeners();
-        this.expertName.init();
+        this.expertName.init(this.experts.length);
       })
     }
   
@@ -78,9 +79,13 @@ class Voting {
         this.getVotes();
         this.hide();
 
-        setToStorage('candidates', this.candidates);
-        setToStorage('experts', this.experts);
-        setToStorage('date', (new Date()).toLocaleString('uk', { dateStyle: 'long', timeStyle: 'short' }));
+        updateVote({
+          id: this.voteId,
+          candidates: this.candidates,
+          experts: this.experts,
+          date: (new Date()).toLocaleString('uk', { dateStyle: 'long', timeStyle: 'short' })
+        });
+
         this.hide();
         this.$buttons.slideToggle();  
       });   
@@ -110,8 +115,10 @@ class Voting {
     }
 
     async getData() {
-      this.candidates = await getFromStorage('candidates') || [];
-      this.experts = await getFromStorage('experts') || [];
+      const { candidates, experts } = await getVote(this.voteId) || [];
+      
+      this.candidates = candidates;
+      this.experts = experts;
     }
   }
 
