@@ -65,10 +65,68 @@ async function getVotes() {
   return findAllData;
 }
 
+async function addUser(element) {
+  const client = await MongoClient.connect(url, { useUnifiedTopology: true });
+
+  const db = client.db(databaseName);
+  const collection = db.collection('users');
+
+  const user = await collection.insertOne(element);
+
+  await client.close();
+
+  return user.insertedId;
+}
+
+async function checkUser(user) {
+  const client = await MongoClient.connect(url, { useUnifiedTopology: true });
+
+  const db = client.db(databaseName);
+  const collection = db.collection('users');
+
+  const findUser = await collection.findOne({login: user.login});
+
+  await client.close();
+
+  if (findUser && findUser.password === user.password) return findUser._id;
+  else return false;
+}
+
+async function verifyUser(login) {
+  const client = await MongoClient.connect(url, { useUnifiedTopology: true });
+
+  const db = client.db(databaseName);
+  const collection = db.collection('users');
+
+  const findUser = await collection.findOne({login});
+
+  await client.close();
+
+  if (findUser) return true;
+  else return false;
+}
+
+async function getUserLoginById(id) {
+  const client = await MongoClient.connect(url, { useUnifiedTopology: true });
+
+  const db = client.db(databaseName);
+  const collection = db.collection('users');
+
+  const findData = await collection.findOne({_id: ObjectId(id)});
+
+  await client.close();
+
+  return findData.login;
+}
+
 module.exports = {
   getVoteById,
   getVotes,
   addVoteToVotes,
   updateVoteToVotes,
-  updateVoteInVotes
+  updateVoteInVotes,
+  addUser,
+  checkUser,
+  verifyUser,
+  getUserLoginById
 }

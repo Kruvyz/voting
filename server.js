@@ -6,7 +6,11 @@ const {
   getVoteById,
   getVotes,
   addVoteToVotes,
-  updateVoteInVotes
+  updateVoteInVotes,
+  addUser,
+  checkUser,
+  verifyUser,
+  getUserLoginById
 } = require('./mongo');
 
 const port = process.env.PORT || 3010;
@@ -83,6 +87,41 @@ app.post('/vote', function(req, res) {
   const { vote } = req.body;
 
   updateVoteInVotes(vote);
+});
+
+app.post('/register', function(req, res){
+  const user = req.body;
+  addUser(user).then(() => {
+    res.sendStatus(200);
+  })
+});
+
+app.get('/verify/:login', function(req, res){
+  const { login } = req.params;
+  
+  verifyUser(login).then(data => {
+    res.json(data);
+  })
+});
+
+app.post('/verify', function(req, res){
+  const user = req.body;
+  
+  checkUser(user).then(data => {
+    res.json(data);
+  })
+});
+
+app.get('/user/:id', function(req, res) {
+  const userId = req.params.id;
+
+  getUserLoginById(userId).then(login => {
+    res.json(login);
+  });
+});
+
+app.get('/auth', function(req, res){
+  res.render('auth');
 });
 
 app.listen(port, function () {

@@ -50,3 +50,46 @@ export async function updateVote(vote) {
 export async function deleteCandidates() {
     fetch('/candidates', { method: 'delete' });    
 }
+
+
+export async function checkLogin(login) {
+    const responce = await fetch('/verify/'+login);
+    const json = responce.json();
+
+    return json;
+}
+
+export async function authorization(userCred) {
+    const responce =     await fetch('/verify', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userCred)
+    });
+
+    const json = responce.json();
+
+    if (!json) {
+        return  new Error('Логін або пароль не вірний')
+    }
+
+    return json;
+}
+
+export async function registerUser(user) {
+    await fetch('/register', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    });
+}
+
+export async function getUserLoginById(id) {
+    const responce = await fetch(`/user/${id}`);
+    const json = await responce.json();
+
+    return json;
+}

@@ -8,6 +8,7 @@ import './styles/button.sass';
 import './components/logo/logo.sass';
 import './components/accordion/accordion.sass';
 import './components/form-name/form-name.sass';
+import './components/auth-form/auth-form.sass';
 
 import FormCandidates from './components/form-candidates/form-candidates';
 import Voting from './components/voting/voting';
@@ -17,7 +18,9 @@ import Winner from './components/winner/winner';
 import Marks from './components/marks/marks';
 import Accordion from './components/accordion/accordion';
 import FormName from './components/form-name/form-name';
+import AuthForm from './components/auth-form/auth-form';
 
+ if (!localStorage.getItem('userId') && window.location.pathname !== '/auth') window.location.assign('/auth');
 
 const formCandidates = new FormCandidates('.js-form-candidates');
 formCandidates.init();
@@ -42,3 +45,6 @@ accordion.init();
 
 const formName = new FormName('.js-form-name');
 formName.init();
+
+const authForm = new AuthForm('.js-auth-form');
+authForm.init();

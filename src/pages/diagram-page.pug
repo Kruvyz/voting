@@ -13,7 +13,7 @@ block body
     +diagram
     +matrix
     .buttons(style="height:100px; justify-content:space-between; padding-top:0")
-        a(class="button", style="align-self: center;", href="/vote") Новий експерт            
+        a(class="button", style="align-self: center;", href="/vote/"+vote._id) Новий експерт            
         a.js-create-new-voting.align-center(class="button", href="/create") Нова експертиза
 
     script(id="data" type="application/json")!= JSON.stringify(vote)

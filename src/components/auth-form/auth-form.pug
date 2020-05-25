@@ -1,0 +1,14 @@
+mixin auth-form
+    form.js-auth-form.auth-form
+        .auth-form__login-input
+            label(for="login") Логін
+            input.login__input(type="text", name="login")
+        
+        .auth-form__password-input
+            label(for="password") Пароль
+            input.password__input(type="password", name="password")
+        
+        .auth-form__buttons
+            input.js-register-button(type="submit", value="Зареєструватись")
+            input.js-sign-in-button(type="submit", value="Ввійти")
+        .message

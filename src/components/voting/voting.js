@@ -1,14 +1,12 @@
-import ExpertName from '../form-experts/experts-name';
-import { addCandidate, addExpert, getVote, updateVote, getFromStorage, setToStorage } from '../../service/data';
+import { addCandidate, addExpert, getVote, updateVote, getFromStorage, setToStorage, getUserLoginById } from '../../service/data';
 
 class Voting {
     constructor(el) {
       this.$el = $(el);
       this.$votingCards = this.$el.find('.js-voting-cards');
       this.$votingExpert = $('.js-voting-expert-name');
-      this.expertName = new ExpertName('.js-form-expert-name');
       this.candidates = [];
-      this.currentExpert = {};
+      this.currentExpert = {votes: {}};
       this.$buttons = $('.js-navigate-buttons');
       this.experts = [];
       this.voteId = this.$el.data('id');
@@ -22,12 +20,13 @@ class Voting {
       
       this.getData().then(() => {
         this.initListeners();
-        this.expertName.init(this.experts.length);
+        this.render();
+        this.show();
       })
     }
   
     render() {
-      $('.js-voting-expert-name').html("Експерт: " + this.currentExpert.name);
+      this.$votingExpert.html("Експерт: " + this.currentExpert.name);
 
       this.candidates.forEach((element, index) => {
         const id = element.name + index;
@@ -66,13 +65,6 @@ class Voting {
     }
   
     initListeners() {
-      $(document)
-        .on('get-expert-name', (e, name) => {
-          this.currentExpert = {name, votes: {}};           
-          this.show();
-          this.render();
-        })
-
       this.$el.on('submit', e => {
         e.preventDefault();
 
@@ -117,6 +109,8 @@ class Voting {
     async getData() {
       const { candidates, experts } = await getVote(this.voteId) || [];
       
+      this.currentExpert.name = await getUserLoginById(localStorage.getItem('userId'));
+
       this.candidates = candidates;
       this.experts = experts;
     }
