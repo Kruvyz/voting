@@ -60,7 +60,7 @@ export async function checkLogin(login) {
 }
 
 export async function authorization(userCred) {
-    const responce =     await fetch('/verify', {
+    const responce = await fetch('/verify', {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
@@ -68,10 +68,10 @@ export async function authorization(userCred) {
         body: JSON.stringify(userCred)
     });
 
-    const json = responce.json();
+    const json = await responce.json();
 
     if (!json) {
-        return  new Error('Логін або пароль не вірний')
+        return Promise.reject('Логін або пароль не вірний');
     }
 
     return json;

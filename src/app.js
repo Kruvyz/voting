@@ -48,3 +48,8 @@ formName.init();
 
 const authForm = new AuthForm('.js-auth-form');
 authForm.init();
+
+$('.js-log-out').on('click', event => {
+    localStorage.setItem('userId', '');
+    window.location.assign('/auth');
+});

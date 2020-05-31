@@ -24,7 +24,7 @@ class FormCandidates {
         const $div = $('.js-name-list');
         $div.html('');
   
-        if(value > 10 || value < 1) return;
+        if(value > 20 || value < 1) return;
     
         for (let i = 0; i < value; i++) {
           $div.append(`
