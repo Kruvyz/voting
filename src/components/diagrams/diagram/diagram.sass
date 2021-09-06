@@ -1,0 +1,131 @@
+@import '../../../styles/color.sass';
+@import '../../../styles/media.sass'
+
+.diagram
+    &__body
+        width: 400px;
+        margin: 2px 0 20px 0;
+
+        +media-mobile
+            width: 300px
+
+    &__header
+        
+    &--duplex
+        .diagram
+            &__body
+                position: relative;
+                height: 150px;
+
+                &::before
+                    content: '';
+                    display: block;
+                    height: 100%;
+                    width: 1px;
+                    position: absolute;
+                    left: 50%;
+                    background: grey;
+                    z-index: 1;
+
+            &-block
+                position: absolute;
+                height: 30px;
+                z-index: 5
+
+                &:nth-child(1)
+                    top: 0px;
+                    left: 50%;
+                    background-color: $dark-green;
+
+                    .diagram-block__value
+                        right: -15px;
+                
+                &:nth-child(2)
+                    top: 30px;
+                    left: 50%;
+                    background-color: $green;       
+
+                    .diagram-block__value
+                        right: -15px;     
+                
+                &:nth-child(3)
+                    top: 60px;
+                    background-color: $yellow;  
+                    left: 50%;
+                    transform: translateX(-50%);   
+            
+                    .diagram-block__value
+                        left: 50%;
+                        transform: translate(-50%, -50%);      
+                
+                &:nth-child(4)
+                    top: 90px;
+                    right: calc(50% - 1px);
+                    background-color: $red;    
+
+                    .diagram-block__value
+                        left: -15px;           
+
+                &:nth-child(5)
+                    top: 120px;
+                    right: calc(50% - 1px);
+                    background-color: $dark-red;    
+
+                    .diagram-block__value
+                        left: -15px;          
+
+                &__value
+                    position: absolute
+                    top: 50%
+                    transform: translateY(-50%)
+
+    &--row
+        .diagram
+            &__body
+                display: flex
+                padding-top: 25px
+
+            &-block
+                height: 30px;
+                z-index: 5;
+                position: relative;
+                border-left: 1px solid $white;
+
+                &:nth-child(1)
+                    background-color: $dark-blue;
+                    border-left: 0;
+            
+                &:nth-child(2)
+                    background-color: $middle-dark-blue;         
+                
+                &:nth-child(3)
+                    background-color: $blue;  
+
+                &:nth-child(4)
+                    background-color: $middle-light-blue;  
+
+                &:nth-child(5)
+                    background-color: $light-blue;
+
+                &:nth-child(odd)
+                    .diagram-block__value
+                        top: 30px;
+
+                &:nth-child(even)
+                    .diagram-block__value
+                        top: -30px;
+
+                &__value
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%)
+
+    &__name
+        text-align: center;
+        word-break: break-word
+
+    &:last-child
+        margin-bottom: 0;
+
+    &:not(:last-child)
+        margin-bottom: 40px        

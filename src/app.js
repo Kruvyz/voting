@@ -1,7 +1,7 @@
 import './components/voting/voting.sass';
 import './components/form-candidates/form-candidates.sass';
 import './styles/global.sass';
-import './components/diagram/diagram.sass';
+import './components/diagrams/diagrams.sass';
 import './components/matrix/matrix.sass';
 import './components/marks/marks.sass';
 import './styles/button.sass';
@@ -9,10 +9,11 @@ import './components/logo/logo.sass';
 import './components/accordion/accordion.sass';
 import './components/form-name/form-name.sass';
 import './components/auth-form/auth-form.sass';
+import './components/diagrams/diagram/diagram.sass';
 
 import FormCandidates from './components/form-candidates/form-candidates';
 import Voting from './components/voting/voting';
-import Diagram from './components/diagram/diagram';
+import Diagrams from './components/diagrams/diagrams';
 import Matrix from './components/matrix/matrix';
 import Winner from './components/winner/winner';
 import Marks from './components/marks/marks';
@@ -28,7 +29,7 @@ formCandidates.init();
 const voting = new Voting('.js-voting');
 voting.init();
 
-const diagram = new Diagram('.js-diagrams');
+const diagram = new Diagrams('.js-diagrams');
 diagram.init();
 
 const matrix = new Matrix('.js-matrix');
