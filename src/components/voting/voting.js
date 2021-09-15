@@ -35,28 +35,28 @@ class Voting {
             <p class="voting__card-title" title="${element.name}">${element.name}</p>
             <div class="voting__card-form">
               <div class="voting__card-item">
-                <input id="${"vote-first" + id}" type="radio" value="2" name="${id}"/>
-                <label for="${"vote-first" + id}">Категорично за</label>
+                <input id="${"vote-first" + id}" type="radio" value="${element.votes[4].value}" name="${id}"/>
+                <label for="${"vote-first" + id}">${element.votes[4].name}</label>
               </div>
   
               <div class="voting__card-item">
-                <input id="${"vote-second" + id}" type="radio" value="1" name="${id}"/>
-                <label for="${"vote-second" + id}">За</label>
+                <input id="${"vote-second" + id}" type="radio" value="${element.votes[3].value}" name="${id}"/>
+                <label for="${"vote-second" + id}">${element.votes[3].name}</label>
               </div>
   
               <div class="voting__card-item">
-                <input id="${"vote-third" + id}" type="radio" value="0" name="${id}" checked="checked"/>
-                <label for="${"vote-third" + id}">Байдуже</label>
+                <input id="${"vote-third" + id}" type="radio" value="${element.votes[2].value}" name="${id}" checked="checked"/>
+                <label for="${"vote-third" + id}">${element.votes[2].name}</label>
               </div>
   
               <div class="voting__card-item">
-                <input id="${"vote-fourth" + id}" type="radio" value="-1" name="${id}"/>
-                <label for="${"vote-fourth" + id}">Проти</label>
+                <input id="${"vote-fourth" + id}" type="radio" value="${element.votes[1].value}" name="${id}"/>
+                <label for="${"vote-fourth" + id}">${element.votes[1].name}</label>
               </div>
   
               <div class="voting__card-item">
-                <input id="${"vote-fifth" + id}" type="radio" value="-2" name="${id}"/>
-                <label for="${"vote-fifth" + id}">Категорично проти</label>
+                <input id="${"vote-fifth" + id}" type="radio" value="${element.votes[0].value}" name="${id}"/>
+                <label for="${"vote-fifth" + id}">${element.votes[0].name}</label>
               </div>
             </form>
           </div>
@@ -99,7 +99,7 @@ class Voting {
 
       for (let i = 0; i < count; i++) {
         let value = this.$votingCards.find(`input[name="${this.candidates[i].name + i}"]:checked`).val();
-        this.candidates[i].votes[value].push(this.currentExpert.name);
+        this.candidates[i].votes.find(vote => vote.value === +value).votedExperts.push(this.currentExpert.name);
         this.currentExpert.votes[this.candidates[i].name] = value;
       }
 

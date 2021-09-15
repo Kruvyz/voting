@@ -33,7 +33,8 @@ class Matrix {
             row.append(`<td class="matrix__name" title="${element.name}"><p>${element.name}</p></td>`);           
             
             this.candidates.forEach(canditate => {
-                row.append(`<td class="color-${+element.votes[canditate.name] + 3} colors"></td>`);
+                const colorId = canditate.votes.find(vote => +vote.value === +element.votes[canditate.name]).id;
+                row.append(`<td class="color-${colorId} colors"></td>`);
             });
 
             this.$el.append(row);

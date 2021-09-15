@@ -53,24 +53,25 @@ class Diagram {
         const elementWidth = this.$el.width() / 2;
 
         this.$body.find('.js-diagram-block').each((i, e) => {
-            let width = (this.candidatesData.votes[2 - i].length / this.countExperts) * elementWidth;
+            const vote = this.candidatesData.votes[this.candidatesData.votes.length - i - 1];
+            let width = (vote.votedExperts.length / this.countExperts) * elementWidth;
             let $value = $(e).find('.diagram-block__value');
 
             $(e).width(width ? width : 0);
-            $value.html(this.candidatesData.votes[2 - i].length);
+            $value.html(vote.votedExperts.length);
         });
     }
 
     renderRow() {
         const elementWidth = this.$el.width();
-        const candidatesCountWithZero = Object.values(this.candidatesData.votes).reduce((acc, el) => el.length ? acc : acc + 1, 0);
+        const candidatesCountWithZero = this.candidatesData.votes.reduce((acc, el) => el.votedExperts.length ? acc : acc + 1, 0);
 
         this.$body.find('.js-diagram-block').each((i, e) => {
-            let width = (this.candidatesData.votes[i - 2].length / this.countExperts) * (elementWidth - MiN_SIZE_ROW_BLOCK * candidatesCountWithZero);
+            let width = (this.candidatesData.votes[i].votedExperts.length / this.countExperts) * (elementWidth - MiN_SIZE_ROW_BLOCK * candidatesCountWithZero);
             let $value = $(e).find('.diagram-block__value');
 
             $(e).width(width ? width : MiN_SIZE_ROW_BLOCK);       
-            $value.html(this.candidatesData.votes[i-2].length);
+            $value.html(this.candidatesData.votes[i].votedExperts.length);
         });
     }
 }

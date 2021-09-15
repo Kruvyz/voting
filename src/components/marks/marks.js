@@ -21,11 +21,7 @@ class Marks {
 
     getMarks() {
         this.candidatesData.forEach((element, index) => {
-            let score = 0;
-
-            for (let i in element.votes) {
-                score += i * element.votes[i].length;
-            }
+            const score = element.votes.reduce((acc, vote) => acc + vote.value * vote.votedExperts.length, 0);
 
             this.marks.push({
                 name: element.name,
@@ -65,10 +61,10 @@ export default Marks;
 
 function compare(a, b) {
     if (b.mark === a.mark) {
-        if (b.votes[-2].length === a.votes[-2].length) {
-            return a.votes[-1].length - b.votes[-1].length;
+        if (b.votes[0].votedExperts.length === a.votes[0].votedExperts.length) {
+            return a.votes[1].votedExperts.length - b.votes[1].votedExperts.length;
         } else {
-            return a.votes[-2].length - b.votes[-2].length;
+            return a.votes[0].votedExperts.length - b.votes[0].votedExperts.length;
         }
     }
 
