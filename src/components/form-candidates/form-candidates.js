@@ -3,11 +3,11 @@ import { addVote } from '../../service/data';
 import renderForm from './form-candidates.pug';
 
 const DEFAULT_MARKS = [
-  { id: 1, value: -2, votedExperts: [], name: 'Категорично проти'},
-  { id: 2, value: -1, votedExperts: [], name: 'Проти'},
-  { id: 3, value: 0, votedExperts: [], name: 'Байдуже'},
-  { id: 4, value: 1, votedExperts: [], name: 'За'},
-  { id: 5, value: 2, votedExperts: [], name: 'Категорично за'}
+  { id: 1, value: -2, votedExperts: [], name: 'Категорично проти', color: '#ff0000'},
+  { id: 2, value: -1, votedExperts: [], name: 'Проти', color: '#FF8270'},
+  { id: 3, value: 0, votedExperts: [], name: 'Байдуже', color: '#FFFF2A'},
+  { id: 4, value: 1, votedExperts: [], name: 'За', color: '#80FE5C'},
+  { id: 5, value: 2, votedExperts: [], name: 'Категорично за', color: '#00D700'}
 ];
 
 class FormCandidates {
@@ -15,6 +15,7 @@ class FormCandidates {
       this.$el = $(el);
       this.$marksChangeList = this.$el.find(SETTINGS.SELECTOR.MARK_LIST);
       this.isMarksChanged = false;
+      this.lastMarkIndex = 0;
     }
   
     init() {
@@ -52,14 +53,38 @@ class FormCandidates {
       $(SETTINGS.SELECTOR.CHANGE_MARKS_BUTTON).on('click', () => {
         this.isMarksChanged = true;
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 2; i++) {
           this.$marksChangeList.append(`
-            <div><input type="text" value="${DEFAULT_MARKS[i].name}" id="name-${i}"> <input type="number" value="${DEFAULT_MARKS[i].value}" id="value-${i}"></div>
-          `)
+            <div>
+              <input type="text" value="${i}" id="name-${i}"/>
+              <input type="number" value="${i}" id="value-${i}"/>
+              <input type="color" id="color-${i}"/>
+            </div>
+          `);
+          this.lastMarkIndex++;
         }
 
-        $(SETTINGS.SELECTOR.MARK_LIST).show();
+        $(SETTINGS.SELECTOR.MARK_LIST_CONTAINER).show();
       });
+
+      
+      $(SETTINGS.SELECTOR.ADD_MARK).on('click', () => {
+          this.$marksChangeList.append(`
+            <div>
+              <input type="text" value="${this.lastMarkIndex}" id="name-${this.lastMarkIndex}"/>
+              <input type="number" value="${this.lastMarkIndex}" id="value-${this.lastMarkIndex}"/>
+              <input type="color" id="color-${this.lastMarkIndex}"/>
+            </div>
+          `);
+          this.lastMarkIndex++;
+      });
+
+      $(SETTINGS.SELECTOR.DELETE_MARK).on('click', () => {
+        if (this.lastMarkIndex <= 2) return;
+
+        this.$marksChangeList.children().last().remove();;
+        this.lastMarkIndex--;
+    });
       
       $(`.js-name-list`).on('submit', (e) => {
         e.preventDefault();
@@ -93,10 +118,11 @@ class FormCandidates {
     getMarks() {
       let marks = [];
 
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < this.lastMarkIndex; i++) {
         marks.push({
           name: this.$marksChangeList.find(`#name-${i}`).val(),
           value: +this.$marksChangeList.find(`#value-${i}`).val(),
+          color: this.$marksChangeList.find(`#color-${i}`).val(),
           votedExperts: [],
           id: i + 1
         })

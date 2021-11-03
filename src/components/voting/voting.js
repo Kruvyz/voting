@@ -34,30 +34,12 @@ class Voting {
           <div class="voting__card">
             <p class="voting__card-title" title="${element.name}">${element.name}</p>
             <div class="voting__card-form">
+            ${element.votes.map(vote => `
               <div class="voting__card-item">
-                <input id="${"vote-first" + id}" type="radio" value="${element.votes[4].value}" name="${id}"/>
-                <label for="${"vote-first" + id}">${element.votes[4].name}</label>
+                <input id="${"vote-" + index + '-' + vote.id}" type="radio" value="${vote.value}" name="${element.name + '-' + index}"/>
+                <label for="${"vote-" + index + '-' + vote.id}">${vote.name}</label>
               </div>
-  
-              <div class="voting__card-item">
-                <input id="${"vote-second" + id}" type="radio" value="${element.votes[3].value}" name="${id}"/>
-                <label for="${"vote-second" + id}">${element.votes[3].name}</label>
-              </div>
-  
-              <div class="voting__card-item">
-                <input id="${"vote-third" + id}" type="radio" value="${element.votes[2].value}" name="${id}" checked="checked"/>
-                <label for="${"vote-third" + id}">${element.votes[2].name}</label>
-              </div>
-  
-              <div class="voting__card-item">
-                <input id="${"vote-fourth" + id}" type="radio" value="${element.votes[1].value}" name="${id}"/>
-                <label for="${"vote-fourth" + id}">${element.votes[1].name}</label>
-              </div>
-  
-              <div class="voting__card-item">
-                <input id="${"vote-fifth" + id}" type="radio" value="${element.votes[0].value}" name="${id}"/>
-                <label for="${"vote-fifth" + id}">${element.votes[0].name}</label>
-              </div>
+            `).join('')}
             </form>
           </div>
         `);
@@ -98,7 +80,7 @@ class Voting {
       let values = [];
 
       for (let i = 0; i < count; i++) {
-        let value = this.$votingCards.find(`input[name="${this.candidates[i].name + i}"]:checked`).val();
+        let value = this.$votingCards.find(`input[name="${this.candidates[i].name + '-' + i}"]:checked`).val();
         this.candidates[i].votes.find(vote => vote.value === +value).votedExperts.push(this.currentExpert.name);
         this.currentExpert.votes[this.candidates[i].name] = value;
       }

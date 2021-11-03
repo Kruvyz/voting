@@ -8,7 +8,11 @@ mixin form-candidates
         button.hidden.js-confirm-button(form="form1") Далі
         button.hidden.js-change-marks-button Змінити оцінки
 
-        form.mark-list.hidden.js-mark-list(id="form2")
+        .mark-list.hidden.js-mark-list-container(id="form2")
             .mark-list__header
                 div Назва
                 div Значення
+                div Колір
+            .js-mark-list
+            button.js-add-mark Додати оцінку
+            button.js-delete-mark Видалити оцінку
