@@ -88,12 +88,8 @@ async function getVotes() {
       }
     }
   ]).toArray();
-  
-  // const findAllData = await collection.find({}).toArray();
 
   await client.close();
-
-  console.log(result);
 
   return result;
 }
