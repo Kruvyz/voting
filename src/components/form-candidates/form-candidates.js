@@ -103,7 +103,8 @@ class FormCandidates {
 
         addVote({
           candidates,
-          name: window.name
+          name: window.name,
+          createdBy: localStorage.getItem('userId')
         }).then(id => {
           window.location.assign(`${window.location.origin}/vote/${id}`);
         });

@@ -1,10 +1,8 @@
 extends ../page-templates/base
 
+include ../components/vote-list/vote-list
+
 block body
-    .vote-list
-        each vote in votes
-            .vote-list__item
-                .vote-list__name= vote.name
-                .vote-list__buttons
-                    a(class="button-link button--small", href="/vote/"+vote._id) Голосувати
-                    a(class="button-link button--small", href="/result/"+vote._id) Результат
+    +vote-list(votes)
+   
+    

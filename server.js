@@ -10,7 +10,8 @@ const {
   addUser,
   checkUser,
   verifyUser,
-  getUserLoginById
+  getUserLoginById,
+  deleteExpertise
 } = require('./mongo');
 
 const port = process.env.PORT || 3010;
@@ -119,6 +120,12 @@ app.get('/user/:id', function(req, res) {
     res.json(login);
   });
 });
+
+app.delete('/expertise/:id', function(req, res) {
+  const id = req.params.id;
+
+  deleteExpertise(id).then((data) => res.sendStatus(200));
+})
 
 app.get('/auth', function(req, res){
   res.render('auth');

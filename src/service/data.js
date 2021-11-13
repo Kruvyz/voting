@@ -93,3 +93,7 @@ export async function getUserLoginById(id) {
 
     return json;
 }
+
+export async function deleteExpertise(id) {
+    await fetch(`/expertise/${id}`, { method: 'DELETE' });
+}

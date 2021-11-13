@@ -119,6 +119,19 @@ async function getUserLoginById(id) {
   return findData.login;
 }
 
+async function deleteExpertise(id) {
+  const client = await MongoClient.connect(url, { useUnifiedTopology: true });
+
+  const db = client.db(databaseName);
+  const collection = db.collection(collectionName);
+
+  const result = await collection.deleteOne({_id: ObjectId(id)});
+
+  await client.close();
+
+  return result;
+}
+
 module.exports = {
   getVoteById,
   getVotes,
@@ -128,5 +141,6 @@ module.exports = {
   addUser,
   checkUser,
   verifyUser,
-  getUserLoginById
+  getUserLoginById,
+  deleteExpertise
 }

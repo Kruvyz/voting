@@ -20,6 +20,7 @@ import Marks from './components/marks/marks';
 import Accordion from './components/accordion/accordion';
 import FormName from './components/form-name/form-name';
 import AuthForm from './components/auth-form/auth-form';
+import VoteList from './components/vote-list/vote-list';
 
  if (!localStorage.getItem('userId') && window.location.pathname !== '/auth') window.location.assign('/auth');
 
@@ -49,6 +50,9 @@ formName.init();
 
 const authForm = new AuthForm('.js-auth-form');
 authForm.init();
+
+const voteList = new VoteList('.js-vote-list');
+voteList.init();
 
 $('.js-log-out').on('click', event => {
     localStorage.setItem('userId', '');
