@@ -24,9 +24,9 @@ class Winner {
         this.candidatesData.forEach((element, index) => {
             let score = 0;
 
-            for (let i in element.votes) {
-                score += i * element.votes[i].length;
-            }
+            element.votes.forEach(element => {
+                score += element.value * element.votedExperts.length;
+            });
 
             if(score / this.expertsData.length > maxScore ) {
                 winner = index;

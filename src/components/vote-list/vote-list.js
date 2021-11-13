@@ -1,4 +1,5 @@
 import { deleteExpertise } from '../../service/data';
+import { confirmDialog } from '../../service/modals';
 import SETTINGS from './settings';
 
 class VoteList {
@@ -23,8 +24,10 @@ class VoteList {
 
     initListeners() {
         this.$el.find(SETTINGS.SELECTOR.BUTTON).on('click', event => {
-            deleteExpertise(event.target.dataset.id).then(() => {
-                location.reload();
+            confirmDialog('Ви впевнені що бажаєти видалити експертизу?').then(() => {
+                deleteExpertise(event.target.dataset.id).then(() => {
+                    location.reload();
+                });
             });
         });
     }

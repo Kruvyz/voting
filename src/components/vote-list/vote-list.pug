@@ -1,10 +1,15 @@
 mixin vote-list(votes)
     .vote-list.js-vote-list
-            each vote in votes
-                .vote-list__item
-                    .vote-list__name= vote.name
-                    .vote-list__buttons
-                        a(class="button-link button--small", href="/vote/"+vote._id) Голосувати
-                        a(class="button-link button--small", href="/result/"+vote._id) Результат
-                        button(class="button-link button--small js-delete-vote-button hidden", data-created-by=vote.createdBy, data-id=vote._id) Видалити
+        .vote-list__header
+            .vote-list__name Експертиза
+            .vote-list__user-name Експерт
+            .vote-list__buttons
+        each vote in votes
+            .vote-list__item
+                .vote-list__name= vote.name
+                .vote-list__user-name= vote.userName
+                .vote-list__buttons
+                    a(class="button-link button--small", href="/vote/"+vote._id) Голосувати
+                    a(class="button-link button--small", href="/result/"+vote._id) Результат
+                    button(class="button-link button--small js-delete-vote-button hidden", data-created-by=vote.createdBy, data-id=vote._id) Видалити
                         

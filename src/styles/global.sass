@@ -99,7 +99,33 @@ footer
         align-self: center
 
 .vote-list
-    padding: 0 200px
+    padding: 0 100px
+
+    &__header
+        display: flex
+        justify-content: space-between
+        margin-top: -10px
+        padding: 10px 0
+        background: lightgray
+        position: relative
+        
+        &::before
+            content: ''
+            position: absolute
+            top: 0
+            height: 100%
+            width: 100px
+            left: -100px
+            background: lightgray
+
+        &::after
+            content: ''
+            position: absolute
+            top: 0
+            height: 100%
+            width: 100px
+            right: -100px
+            background: lightgray
 
     &__item
         display: flex
@@ -108,6 +134,10 @@ footer
 
     &__name
         vertical-align: middle
+        flex: 1
+
+    &__user-name
+        flex: 1
 
     &__buttons
         display: flex

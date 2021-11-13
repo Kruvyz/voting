@@ -56,13 +56,46 @@ async function getVotes() {
   const client = await MongoClient.connect(url, { useUnifiedTopology: true });
 
   const db = client.db(databaseName);
+
   const collection = db.collection(collectionName);
 
-  const findAllData = await collection.find({}).toArray();
+  const result = await collection.aggregate([
+    {
+      $project: {
+        createdBy: {$toObjectId: "$createdBy"},
+        candidates: 1,
+        name: 1,
+        date: 1,
+        experts: 1
+      }
+    },
+    {
+      $lookup: {
+        from: 'users',
+        localField: 'createdBy',
+        foreignField: '_id',
+        as: 'user'
+      }
+    },
+    {
+      $project: {
+        userName: { $arrayElemAt: ["$user.login", 0] },
+        candidates: 1,
+        name: 1,
+        date: 1,
+        experts: 1,
+        createdBy: 1
+      }
+    }
+  ]).toArray();
+  
+  // const findAllData = await collection.find({}).toArray();
 
   await client.close();
 
-  return findAllData;
+  console.log(result);
+
+  return result;
 }
 
 async function addUser(element) {
