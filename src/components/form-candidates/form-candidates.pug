@@ -5,14 +5,22 @@ mixin form-candidates
             input.js-field-number(id="count-candidates", min="1", max="20", type="number", value="2")
             button.js-button OK
         form.form-candidates__name-list.js-name-list(id="form1")
-        button.hidden.js-confirm-button(form="form1") Далі
-        button.hidden.js-change-marks-button Змінити оцінки
+        .js-info-marks-container.hidden
+            div Шкала для оцінювання (альтернатив):
+            .js-info-marks.marks-info-container
+        button.hidden.js-confirm-button.button-margin(form="form1") Перейти до оцінювання
+        button.hidden.js-change-marks-button.button-margin Змінити шкалу
 
         .mark-list.hidden.js-mark-list-container(id="form2")
+            div Конструктор шкал
+            button.js-close-marks.close-marks Повернутись до попередньої шкали
+
+
             .mark-list__header
-                div Назва
-                div Значення
-                div Колір
-            .js-mark-list
-            button.js-add-mark Додати оцінку
-            button.js-delete-mark Видалити оцінку
+                .item-name Назва градації
+                .item-value Значення
+                .item-color Колір
+            .js-mark-list.mark-list-inputs
+            button.js-add-mark.button-margin Додати градацію
+            button.js-delete-mark.button-margin Видалити градацію
+            button.hidden.js-confirm-button.button-margin(form="form1") Перейти до оцінювання

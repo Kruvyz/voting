@@ -8,6 +8,9 @@ export const FORM_CANDIDATES_SETTINGS = {
       MARK_LIST: '.js-mark-list',
       MARK_LIST_CONTAINER: '.js-mark-list-container',
       ADD_MARK: '.js-add-mark',
-      DELETE_MARK: '.js-delete-mark'
+      DELETE_MARK: '.js-delete-mark',
+      INFO_MARKS: '.js-info-marks',
+      INFO_MARKS_CONTAINER: '.js-info-marks-container',
+      CLOSE_MARKS: '.js-close-marks'
     }
 }

@@ -17,12 +17,70 @@
         margin-bottom: 5px;
 
 .mark-list
-    margin-top: 20px;
+    max-width: 600px
+    margin: auto
+    margin-top: 40px
+    position: relative
 
     &__header 
-        display: flex;
-        justify-content: center;
-
-        div
-            width: 220px
+        display: flex
+        justify-content: center
+        margin-top: 15px
         
+
+.marks-info
+    font-size: 16px
+    display: flex
+    justify-content: space-between
+
+    &__item
+        margin-bottom: 10px
+
+    &__name
+        flex: 6
+        text-align: start
+    
+    &__value
+        flex: 3
+
+    &__color
+        flex: 1
+
+.marks-info-container
+    max-width: 400px
+    margin: 20px auto
+
+.mark-list-inputs
+    display: flex
+    flex-direction: column
+    margin-bottom: 10px
+
+.item-name
+    flex: 3
+    margin-right: 10px
+
+    input
+        width: 100%
+
+.item-value
+    flex: 3
+    margin-right: 10px
+    
+    input
+        width: 100%
+
+.item-color
+    flex: 1
+    
+    input
+        width: 100%
+
+.mark-inputs
+    display: flex
+    justify-content: center
+    align-items: center
+
+.close-marks
+    position: absolute
+    right: -40%
+    top: 0

@@ -1,6 +1,7 @@
 import { FORM_CANDIDATES_SETTINGS as SETTINGS } from './settings';
 import { addVote } from '../../service/data';
-import renderForm from './form-candidates.pug';
+import marksInfo from './marks-info.pug';
+import markInputs from './mark-inputs.pug';
 
 const DEFAULT_MARKS = [
   { id: 1, value: -2, votedExperts: [], name: 'Категорично проти', color: '#ff0000'},
@@ -14,6 +15,8 @@ class FormCandidates {
     constructor(el) {
       this.$el = $(el);
       this.$marksChangeList = this.$el.find(SETTINGS.SELECTOR.MARK_LIST);
+      this.$marksInfo = this.$el.find(SETTINGS.SELECTOR.INFO_MARKS);
+      this.$marksInfoContainer = this.$el.find(SETTINGS.SELECTOR.INFO_MARKS_CONTAINER);
       this.isMarksChanged = false;
       this.lastMarkIndex = 0;
     }
@@ -22,7 +25,8 @@ class FormCandidates {
       if (!this.$el.length) return;
       
       this.hide();
-      this.initListeners();      
+      this.initListeners();
+      this.renderMarksInfo(); 
     }
   
     hide() {
@@ -48,19 +52,14 @@ class FormCandidates {
         
         $(`.${SETTINGS.SELECTOR.CONFIRM_BUTTON}`).show();
         $(SETTINGS.SELECTOR.CHANGE_MARKS_BUTTON).show();
+        this.$marksInfoContainer.show();
       });
 
       $(SETTINGS.SELECTOR.CHANGE_MARKS_BUTTON).on('click', () => {
         this.isMarksChanged = true;
 
         for (let i = 0; i < 2; i++) {
-          this.$marksChangeList.append(`
-            <div>
-              <input type="text" value="${i}" id="name-${i}"/>
-              <input type="number" value="${i}" id="value-${i}"/>
-              <input type="color" id="color-${i}"/>
-            </div>
-          `);
+          this.$marksChangeList.append(markInputs({index: i}));
           this.lastMarkIndex++;
         }
 
@@ -69,13 +68,7 @@ class FormCandidates {
 
       
       $(SETTINGS.SELECTOR.ADD_MARK).on('click', () => {
-          this.$marksChangeList.append(`
-            <div>
-              <input type="text" value="${this.lastMarkIndex}" id="name-${this.lastMarkIndex}"/>
-              <input type="number" value="${this.lastMarkIndex}" id="value-${this.lastMarkIndex}"/>
-              <input type="color" id="color-${this.lastMarkIndex}"/>
-            </div>
-          `);
+          this.$marksChangeList.append(markInputs({index: this.lastMarkIndex}));
           this.lastMarkIndex++;
       });
 
@@ -114,6 +107,11 @@ class FormCandidates {
       $(document).on('create-candidates', () => {
         this.$el.show();
       })
+
+      $(SETTINGS.SELECTOR.CLOSE_MARKS).on('click', () => {
+        $(SETTINGS.SELECTOR.MARK_LIST_CONTAINER).hide();
+        this.isMarksChanged = false;
+      });
     }
 
     getMarks() {
@@ -130,6 +128,12 @@ class FormCandidates {
       }
 
       return marks;
+    }
+
+    renderMarksInfo() {
+      DEFAULT_MARKS.forEach(mark => {
+        this.$marksInfo.append(marksInfo({mark}))
+      });
     }
   }
 
