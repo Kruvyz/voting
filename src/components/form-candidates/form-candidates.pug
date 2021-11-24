@@ -6,15 +6,15 @@ mixin form-candidates
             button.js-button OK
         form.form-candidates__name-list.js-name-list(id="form1")
         .js-info-marks-container.hidden
-            div Шкала для оцінювання (альтернатив):
+            div
+                b Шкала для оцінювання:
             .js-info-marks.marks-info-container
         button.hidden.js-confirm-button.button-margin(form="form1") Перейти до оцінювання
         button.hidden.js-change-marks-button.button-margin Змінити шкалу
 
         .mark-list.hidden.js-mark-list-container(id="form2")
-            div Конструктор шкал
+            .mark-list__head Конструктор шкал
             button.js-close-marks.close-marks Повернутись до попередньої шкали
-
 
             .mark-list__header
                 .item-name Назва градації

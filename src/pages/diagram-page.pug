@@ -2,6 +2,7 @@ extends ../page-templates/base
 
 include ../components/diagrams/diagrams
 include ../components/matrix/matrix
+include ../components/mark-list/mark-list
 
 block body
     h2.js-voting-name.h2.label.big-text
@@ -10,6 +11,7 @@ block body
     h2.js-experts-count.h2.label
     h2.winner.js-winner.h2.label
     .js-marks.marks
+    +mark-list
     +diagram
     +matrix
     .buttons(style="height:100px; justify-content:space-between; padding-top:0")       
