@@ -100,6 +100,9 @@ footer
 
 .vote-list
     padding: 0 100px
+    
+    +media-mobile
+        padding: 0
 
     &__header
         display: flex
@@ -118,6 +121,10 @@ footer
             left: -100px
             background: lightgray
 
+            +media-mobile
+                content: none
+            
+
         &::after
             content: ''
             position: absolute
@@ -126,6 +133,9 @@ footer
             width: 100px
             right: -100px
             background: lightgray
+            
+            +media-mobile
+                content: none
 
     &__item
         display: flex
